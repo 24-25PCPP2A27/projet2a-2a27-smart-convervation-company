@@ -1,0 +1,68 @@
+#include "Client.h"
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlQueryModel>
+#include <QVariant>
+#include <QMessageBox>
+
+// Constructor + client attributes
+Client::Client(int idCl, const QString& nom, const QString& prenom, const QString& email,
+               const QString& dateInscription, int age, const QString& sexe, 
+               const QString& telephone, int nbServiceRecu)
+{
+    this->idCl = idCl;
+    this->nom = nom;
+    this->prenom = prenom;
+    this->email = email;
+    this->dateInscription = dateInscription;
+    this->age = age;
+    this->sexe = sexe;
+    this->telephone = telephone;
+    this->nbServiceRecu = nbServiceRecu;
+}
+bool Client::ajouter()
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO Clients (IdCl, Nom, Prenom, Email, DateInscription, Age, Sexe, Telephone, NbServiceRecu) "
+                  "VALUES (:idCl, :nom, :prenom, :email, :dateInscription, :age, :sexe, :telephone, :nbServiceRecu)");
+
+    query.bindValue(":idCl", idCl);
+    query.bindValue(":nom", nom);
+    query.bindValue(":prenom", prenom);
+    query.bindValue(":email", email);
+    query.bindValue(":dateInscription", dateInscription);
+    query.bindValue(":age", age);
+    query.bindValue(":sexe", sexe);
+    query.bindValue(":telephone", telephone);
+    query.bindValue(":nbServiceRecu", nbServiceRecu);
+
+    
+    return query.exec();
+}
+QSqlQueryModel* Client::afficher()
+{
+    QSqlQueryModel* model = new QSqlQueryModel();
+    model->setQuery("SELECT * FROM Clients");
+
+    // Set the headers for each column of the display
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("IdCl"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prénom"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Email"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Date d’inscription"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Âge"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("Sexe"));
+    model->setHeaderData(7, Qt::Horizontal, QObject::tr("Téléphone"));
+    model->setHeaderData(8, Qt::Horizontal, QObject::tr("Nombre de services reçus"));
+
+    return model;
+}
+bool Client::supprimer(int idCl)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM Clients WHERE IdCl = :idCl");
+    query.bindValue(":idCl", idCl);
+
+    
+    return query.exec();
+}
