@@ -2,6 +2,7 @@
 #define TRAITEMENTPRODUIT_H
 
 #include <QString>
+#include <QList>
 
 class traitementproduit {
 private:
@@ -35,6 +36,12 @@ public:
 
     // Méthodes supplémentaires
     QString toString() const;
+
+    // Méthodes CRUD
+    bool create(); // Créer
+    static QList<traitementproduit> readAll(); // Lire tous
+    bool update(); // Mettre à jour
+    bool remove(); // Supprimer
 };
 
 #endif // TRAITEMENTPRODUIT_H

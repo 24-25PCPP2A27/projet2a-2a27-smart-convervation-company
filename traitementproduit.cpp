@@ -1,15 +1,18 @@
 #include "traitementproduit.h"
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlDatabase>
+#include <QVariant>
+#include <QDebug>
 
 // Constructeur par défaut
 traitementproduit::traitementproduit()
     : id(0), prix(0.0), typeTraitement(""), duree(0), temperatureMin(0.0), temperatureMax(0.0) {
-    // Initialisation par défaut des attributs
 }
 
 // Constructeur avec paramètres
 traitementproduit::traitementproduit(int id, double prix, const QString& typeTraitement, int duree, double temperatureMin, double temperatureMax)
     : id(id), prix(prix), typeTraitement(typeTraitement), duree(duree), temperatureMin(temperatureMin), temperatureMax(temperatureMax) {
-    // Initialisation des attributs avec les paramètres fournis
 }
 
 // Getters
@@ -71,4 +74,134 @@ QString traitementproduit::toString() const {
         .arg(duree)
         .arg(temperatureMin)
         .arg(temperatureMax);
+}
+
+// Méthodes CRUD
+
+// Créer
+bool traitementproduit::create() {
+    QSqlQuery query;
+    query.prepare("INSERT INTO traitementproduit (prix, typeTraitement, duree, temperatureMin, temperatureMax) VALUES (?, ?, ?, ?, ?)");
+    query.addBindValue(prix);
+    query.addBindValue(typeTraitement);
+    query.addBindValue(duree);
+    query.addBindValue(temperatureMin);
+    query.addBindValue(temperatureMax);
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de l'insertion:" << query.lastError();
+        return false;
+    }
+    id = query.lastInsertId().toInt(); // Récupérer l'ID généré
+    return true;
+}
+
+// Lire tous
+QList<traitementproduit> traitementproduit::readAll() {
+    QList<traitementproduit> produits;
+    QSqlQuery query("SELECT * FROM traitementproduit");
+
+    while (query.next()) {
+        traitementproduit produit;
+        produit.setId(query.value("id").toInt());
+        produit.setPrix(query.value("prix").toDouble());
+        produit.setTypeTraitement(query.value("typeTraitement").toString());
+        produit.setDuree(query.value("duree").toInt());
+        produit.setTemperatureMin(query.value("temperatureMin").toDouble());
+        produit.setTemperatureMax(query.value("temperatureMax").toDouble());
+        produits.append(produit);
+    }
+    return produits;
+}
+
+// Mettre à jour
+bool traitementproduit::update() {
+    QSqlQuery query;
+    query.prepare("UPDATE traitementproduit SET prix = ?, typeTraitement = ?, duree = ?, temperatureMin = ?, temperatureMax = ? WHERE id = ?");
+    query.addBindValue(prix);
+    query.addBindValue(typeTraitement);
+    query.addBindValue(duree);
+    query.addBindValue(temperatureMin);
+    query.addBindValue(temperatureMax);
+    query.addBindValue(id);
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de la mise à jour:" << query.lastError();
+        return false;
+    }
+    return true;
+}
+
+// Supprimer
+bool traitementproduit::remove() {
+    QSqlQuery query;
+    query.prepare("DELETE FROM traitementproduit WHERE id = ?");
+    query.addBindValue(id);
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de la suppression:" << query.lastError();
+        return false;
+    }
+    return true;
+}
+
+    query.prepare("UPDATE traitementproduit SET prix = ?, typeTraitement = ?, duree = ?, temperatureMin = ?, temperatureMax = ? WHERE id = ?");
+    query.addBindValue(prix);
+    query.addBindValue(typeTraitement);
+    query.addBindValue(duree);
+    query.addBindValue(temperatureMin);
+    query.addBindValue(temperatureMax);
+    query.addBindValue(id);
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de la mise à jour:" << query.lastError();
+        return false;
+    }
+    return true;
+}
+
+// Supprimer
+bool traitementproduit::remove() {
+    QSqlQuery query;
+    query.prepare("DELETE FROM traitementproduit WHERE id = ?");
+    query.addBindValue(id);
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de la suppression:" << query.lastError();
+        return false;
+    }
+    return true;
+}
+
+
+
+// Mettre à jour
+bool traitementproduit::update() {
+    QSqlQuery query;
+    query.prepare("UPDATE traitementproduit SET prix = ?, typeTraitement = ?, duree = ?, temperatureMin = ?, temperatureMax = ? WHERE id = ?");
+    query.addBindValue(prix);
+    query.addBindValue(typeTraitement);
+    query.addBindValue(duree);
+    query.addBindValue(temperatureMin);
+    query.addBindValue(temperatureMax);
+    query.addBindValue(id);
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de la mise à jour:" << query.lastError();
+        return false;
+    }
+    return true;
+}
+
+// Supprimer
+bool traitementproduit::remove() {
+    QSqlQuery query;
+    query.prepare("DELETE FROM traitementproduit WHERE id = ?");
+    query.addBindValue(id);
+
+    if (!query.exec()) {
+        qDebug() << "Erreur lors de la suppression:" << query.lastError();
+        return false;
+    }
+    return true;
 }
