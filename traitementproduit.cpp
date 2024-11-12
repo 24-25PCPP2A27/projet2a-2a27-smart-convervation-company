@@ -97,3 +97,33 @@ bool traitementproduit::modifier(int id, QString type_traitement, int duree_trai
 
     return query.exec();
 }
+QSqlQueryModel* traitementproduit::tri_duree() {
+    QSqlQueryModel* model = new QSqlQueryModel();
+    model->setQuery("SELECT * FROM TRAITEMENT_DE_PRODUIT ORDER BY Durée");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Type"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Durée"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Température Min"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Température Max"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Prix"));
+
+    return model;
+}
+QSqlQueryModel* traitementproduit::rechercher(int id) {
+QSqlQuery query;
+QSqlQueryModel* model = new QSqlQueryModel();
+query.prepare("SELECT * FROM TRAITEMENT_DE_PRODUIT WHERE IDTRAIT = :id");
+query.bindValue(":id", id);
+
+if (query.exec()) {
+    model->setQuery(query);
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Type"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Durée"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Température Min"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Température Max"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Prix"));
+
+}
+return model;
+}

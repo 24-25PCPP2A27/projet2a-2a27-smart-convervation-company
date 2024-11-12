@@ -29,6 +29,10 @@ private slots:
 
     void on_afficher_clicked();
 
+    void on_trier_clicked();
+
+    void on_rechercher_clicked();
+
 private:
     Ui::MainWindow *ui;
     traitementproduit T;  // Instance de la classe traitementproduit

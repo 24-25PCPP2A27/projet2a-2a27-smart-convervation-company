@@ -148,3 +148,31 @@ void MainWindow::on_afficher_clicked()
     ui->tab_5->setModel(T.afficher());
     ui->tab_6->setModel(T.afficher());
 }
+
+void MainWindow::on_trier_clicked()
+{
+        //if (ui->tri_duree->isChecked()) {
+            //ui->tab3->setModel(T.tri_duree());
+        }
+
+
+
+
+void MainWindow::on_rechercher_clicked() {
+{
+   traitementproduit T;
+//    int id = ui->rech_id->text().toInt();
+
+   // bool test = T.rechercher(id);
+    QMessageBox msgBox;
+
+    //if (test) {
+        msgBox.setText("Recherche avec succès.");
+       // ui->tab_rech->setModel(T.rechercher(id));
+    }
+    else
+    {
+        msgBox.setText("Client inexistant");
+        msgBox.exec();
+    }
+}

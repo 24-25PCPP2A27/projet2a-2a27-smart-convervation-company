@@ -39,6 +39,8 @@ public:
     bool supprimer(int id);
     QSqlQueryModel* afficher();
     bool modifier(int id, QString type_traitement, int duree_traitement, int temp_min, int temp_max, double prix);
+    QSqlQueryModel* tri_duree();
+    QSqlQueryModel* rechercher(int id);
 };
 
 #endif // TRAITEMENTPRODUIT_H
