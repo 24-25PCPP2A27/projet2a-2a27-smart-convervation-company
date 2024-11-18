@@ -21,7 +21,7 @@ public:
     Equipement(int id, QString nom, QDate dateAquisition, QString etat,
                QString localisation, QString categorie, double prix);
 
-    // Getters
+    // Getters and setters
     QString getNom() const { return nom; }
     int getID() const { return id; }
     QDate getDateAquisition() const { return dateAquisition; }
@@ -30,7 +30,6 @@ public:
     QString getCategorie() const { return categorie; }
     double getPrix() const { return prix; }
 
-    // Setters
     void setNom(QString n) { nom = n; }
     void setID(int id) { this->id = id; }
     void setDateAquisition(QDate date) { dateAquisition = date; }
@@ -42,6 +41,13 @@ public:
     bool ajouter();
     QSqlQueryModel* afficher();
     bool supprimer(int id);
+    bool modifier();
+
+    QSqlQueryModel* rechercher(const QString &nom); // Search function
+
+    // Sorting function by 'etat'
+    QSqlQueryModel* afficherParEtat(bool ascending);
+    QMap<QString, double> getStatistics();
 };
 
 #endif // EQUIPEMENT_H

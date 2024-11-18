@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "equipement.h" // Include the Equipement class
+#include "equipement.h"  // Include the Equipement class
 #include "connection.h"
 
 QT_BEGIN_NAMESPACE
@@ -17,15 +17,18 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_ajouter_clicked();
-    void on_pushButton_supprimer_clicked();
-    void on_pushButton_ajouter_equipement_clicked(); // New slot for adding equipment
-    void on_pushButton_supprimer_equipement_clicked(); // New slot for deleting equipment
+    void on_pb1_clicked();  // Add Equipment
+    void on_pb2_clicked();  // Edit Equipment
+    void on_pb3_clicked();  // Delete Equipment
+    void on_pb_rech_clicked(); // Search by name
+    void on_pb_Export_clicked();
+    void on_pb_sortEtat_clicked(); // Sort by state
+    void on_pushButton_Stats_clicked();
+
 
 private:
     Ui::MainWindow *ui;
-    Equipement Etemp;  // Instance of Equipement
+    Equipement Etemp;  // Instance of Equipement to interact with the DB
 };
 
 #endif // MAINWINDOW_H
-
