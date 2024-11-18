@@ -1,0 +1,30 @@
+<RCC>
+  <qresource>
+    <file>im/images (3).png</file>
+    <file>m/images (3).png</file>
+    <file>images/11181369.png</file>
+    <file>images/construction_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>images/shopping_cart_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>images/sports_esports_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>images/images (3).png</file>
+    <file>images/images (4).png</file>
+    <file>images/img-hotellerie-produits.jpg</file>
+    <file>images/6009864.png</file>
+    <file>images/912267.png</file>
+    <file>images/images (2).png</file>
+    <file>images/bed_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+    <file>images/dashboard.png</file>
+    <file>images/dashboard_white.png</file>
+    <file>images/log_out.png</file>
+    <file>images/log_out_white.png</file>
+    <file>images/menu.png</file>
+    <file>images/notifications.png</file>
+    <file>images/notifications_white.png</file>
+    <file>images/profile.png</file>
+    <file>images/profile_pic.png</file>
+    <file>images/profile_white.png</file>
+    <file>images/search.png</file>
+    <file>images/settings.png</file>
+    <file>images/settings_white.png</file>
+  </qresource>
+</RCC>
