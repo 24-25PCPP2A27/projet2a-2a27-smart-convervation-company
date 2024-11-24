@@ -14,9 +14,9 @@
 #include <QAbstractItemModel>
 #include <QString>
 #include <QUrl>
-
 #include <QtCore>
-
+#include <QFileDialog>
+#include"qrcode.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -34,12 +34,13 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     int id=ui->id->text().toInt();
-    QString type=ui->type->text();
+     QString type = ui->type->currentText();
+
     int duree=ui->duree->text().toInt();
     int tmpMax=ui->tmpMax->text().toInt();
     int tmpMin=ui->tmpMin->text().toInt();
     float prix=ui->prix->text().toFloat();
-    if (ui->id->text().isEmpty() || ui->type->text().isEmpty() || ui->duree->text().isEmpty() ||
+    if (ui->id->text().isEmpty() || type.isEmpty() || ui->duree->text().isEmpty() ||
         ui->tmpMax->text().isEmpty() || ui->tmpMin->text().isEmpty() || ui->prix->text().isEmpty()) {
         QMessageBox::warning(this, "Input Error", "All fields must be filled out.");
         return;
@@ -67,7 +68,7 @@ void MainWindow::on_pushButton_clicked()
         ui->tab_6->setModel(T.afficher());
         ui->id->clear();
                    ui->id->clear();
-                   ui->type->clear();
+
                    ui->duree->clear();
                    ui->tmpMax->clear();
                    ui->tmpMin->clear();
@@ -149,30 +150,106 @@ void MainWindow::on_afficher_clicked()
     ui->tab_6->setModel(T.afficher());
 }
 
+
 void MainWindow::on_trier_clicked()
 {
-        //if (ui->tri_duree->isChecked()) {
-            //ui->tab3->setModel(T.tri_duree());
+    if (ui->tri_duree->isChecked())
+        {
+            ui->tab_tri->setModel(T.tri_duree());
+
         }
+}
 
-
-
-
-void MainWindow::on_rechercher_clicked() {
+void MainWindow::on_rechercher_clicked()
 {
-   traitementproduit T;
-//    int id = ui->rech_id->text().toInt();
+    int id = ui->rech_id->text().toInt();
 
-   // bool test = T.rechercher(id);
+    bool test = T.rechercher(id);
     QMessageBox msgBox;
 
-    //if (test) {
+    if (test) {
         msgBox.setText("Recherche avec succès.");
-       // ui->tab_rech->setModel(T.rechercher(id));
-    }
-    else
-    {
+        ui->tab_rech->setModel(T.rechercher(id));
+    } else {
         msgBox.setText("Client inexistant");
         msgBox.exec();
     }
+}
+
+
+
+
+
+void MainWindow::on_pdf_clicked()
+{
+    T.exportDataToPDF();
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    T.exportDataToPDF();
+}
+
+void MainWindow::on_stats_clicked()
+{
+
+    QLayoutItem* item;
+    while ((item = ui->stats_3->layout()->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+    QChartView *chartView = nullptr;
+
+
+        chartView = T.type1();
+
+        if (chartView != nullptr) {
+            ui->stats_3->layout()->addWidget(chartView);
+        }
+
+}
+
+void MainWindow::on_qrCode_clicked()
+{
+    using namespace qrcodegen;
+
+    QString value = ui->qr_code_bar->text();
+
+    if (value.isEmpty()) {
+        // Display an error message if the QR code field is empty
+        QMessageBox::warning(this, "Error", "QR Code cannot be empty!");
+    } else {
+      //  int id = value.toInt();  // Assuming the ID is an integer
+
+        // Check if the ID exists using the idExists function
+
+            // Generate QR code if the ID exists
+            QString text = "traitement produit with id : " + value + " is valider.";
+
+            // Create the QR Code object
+            QrCode qr = QrCode::encodeText(text.toUtf8().data(), QrCode::Ecc::MEDIUM);
+
+            qint32 sz = qr.getSize();
+            QImage im(sz, sz, QImage::Format_RGB32);
+            QRgb black = qRgb(9, 13, 12);
+            QRgb white = qRgb(255, 255, 255);
+
+            for (int y = 0; y < sz; y++) {
+                for (int x = 0; x < sz; x++) {
+                    im.setPixel(x, y, qr.getModule(x, y) ? black : white);
+                }
+
+
+            ui->qrcodecommande_2->setPixmap(QPixmap::fromImage(im.scaled(200, 200, Qt::KeepAspectRatio, Qt::FastTransformation), Qt::MonoOnly));
+        }
+    }
+}
+
+void MainWindow::on_rech_id_textChanged(const QString &arg1)
+{
+
+    int id = arg1.toInt();
+    // Call the rechercher function with the selected option and input value
+    ui->tab_5->setModel(T.rechercher(id));
+    ui->tab_5->clearSelection();
 }

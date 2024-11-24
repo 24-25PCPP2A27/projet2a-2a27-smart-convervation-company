@@ -3,6 +3,9 @@
 
 #include "traitementproduit.h"
 #include <QMainWindow>
+#include <QString>
+#include <QSqlQueryModel>
+#include <QFileDialog>
 
 namespace Ui {
 class MainWindow;
@@ -17,11 +20,8 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();   // Bouton pour l'ajout
-    void on_pb_supp_clicked();      // Bouton pour la suppression
-    void on_pushButton_2_clicked(); // Bouton pour la modification
 
-    void on_pushButton_2_clicked(bool checked);
+    void on_pushButton_clicked();
 
     void on_suprimer_clicked();
 
@@ -29,9 +29,19 @@ private slots:
 
     void on_afficher_clicked();
 
-    void on_trier_clicked();
+    //void on_trier_clicked();
+     void on_trier_clicked();
 
-    void on_rechercher_clicked();
+     void on_rechercher_clicked();
+     void on_pdf_clicked();
+
+     void on_pushButton_3_clicked();
+
+     void on_stats_clicked();
+
+     void on_qrCode_clicked();
+
+     void on_rech_id_textChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

@@ -3,12 +3,14 @@
 # Project created by QtCreator 2018-10-26T21:45:23
 #
 #-------------------------------------------------
+QT+= core gui sql
 
-QT       += core gui sql
-QT += sql
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
+QT+= sql
+QT += printsupport
+QT +=  printsupport
+QT += charts
+QT+= core gui sql network
 TARGET = Atelier_Connexion
 TEMPLATE = app
 
@@ -26,14 +28,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    arduino.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
+    qrcode.cpp \
     traitementproduit.cpp
 
 HEADERS += \
+    arduino.h \
         mainwindow.h \
     connection.h \
+    qrcode.h \
     traitementproduit.h
 
 FORMS += \

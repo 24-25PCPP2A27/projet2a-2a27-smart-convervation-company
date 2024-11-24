@@ -1,9 +1,14 @@
 #ifndef TRAITEMENTPRODUIT_H
 #define TRAITEMENTPRODUIT_H
-
 #include <QString>
 #include <QSqlQueryModel>
 
+#include <QtCharts/QChartView>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QChart>
+#include <QtCharts/QBarCategoryAxis>
+#include <QtCharts>
 class traitementproduit {
 private:
     int id;
@@ -12,6 +17,7 @@ private:
     int temp_min;
     int temp_max;
     double prix;
+
 
 public:
     // Constructeurs
@@ -41,6 +47,10 @@ public:
     bool modifier(int id, QString type_traitement, int duree_traitement, int temp_min, int temp_max, double prix);
     QSqlQueryModel* tri_duree();
     QSqlQueryModel* rechercher(int id);
+    bool rechercher();
+    void exportDataToPDF();
+    QChartView* type1() ;
+
 };
 
 #endif // TRAITEMENTPRODUIT_H
