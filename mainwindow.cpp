@@ -16,7 +16,11 @@
 #include <QUrl>
 #include <QtCore>
 #include <QFileDialog>
-#include"qrcode.h"
+#include "qrcode.h"
+#include "arduino.h"
+#include <QSerialPort>
+#include <QSerialPortInfo>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -24,124 +28,120 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->tab_5->setModel(T.afficher());
     ui->tab_6->setModel(T.afficher());
+
+    // Initialize arduino object
+    arduino = new Arduino(this); // Initialize the Arduino object
+    arduino->openSerialPort();
+
+    // Connect the Arduino's read signal to a slot in MainWindow
+    connect(arduino->serial, &QSerialPort::readyRead, this, [=]() {
+        arduino->readData(); // Process incoming data
+    });
 }
 
 MainWindow::~MainWindow()
 {
+    arduino->closeSerialPort();
+    delete arduino; // Free memory
     delete ui;
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    int id=ui->id->text().toInt();
-     QString type = ui->type->currentText();
+    int id = ui->id->text().toInt();
+    QString type = ui->type->currentText();
+    int duree = ui->duree->text().toInt();
+    int tmpMax = ui->tmpMax->text().toInt();
+    int tmpMin = ui->tmpMin->text().toInt();
+    float prix = ui->prix->text().toFloat();
 
-    int duree=ui->duree->text().toInt();
-    int tmpMax=ui->tmpMax->text().toInt();
-    int tmpMin=ui->tmpMin->text().toInt();
-    float prix=ui->prix->text().toFloat();
     if (ui->id->text().isEmpty() || type.isEmpty() || ui->duree->text().isEmpty() ||
         ui->tmpMax->text().isEmpty() || ui->tmpMin->text().isEmpty() || ui->prix->text().isEmpty()) {
         QMessageBox::warning(this, "Input Error", "All fields must be filled out.");
         return;
     }
 
-           if (id <= 0) {
-               QMessageBox::warning(this, "Input Error", "ID must be a positive number.");
-               return;
-           }
-           if (prix <= 0) {
-               QMessageBox::warning(this, "Input Error", "prix must be a positive number.");
-               return;
-           }
-    traitementproduit T(id,type,duree,tmpMax,tmpMin,prix);
-
-
-    bool test=T.ajouter();
-    QMessageBox msgBox;
-    if(test)
-    {
-        QMessageBox::information(nullptr, QObject::tr("done"),
-                QObject::tr("ajout avec succés. \n"
-                                             "Click Cancel to exit ."), QMessageBox::Cancel);
-        ui->tab_5->setModel(T.afficher());
-        ui->tab_6->setModel(T.afficher());
-        ui->id->clear();
-                   ui->id->clear();
-
-                   ui->duree->clear();
-                   ui->tmpMax->clear();
-                   ui->tmpMin->clear();
-                   ui->prix->clear();
-    }
-    else
-    { ui->tab_5->setModel(T.afficher());
-        ui->tab_6->setModel(T.afficher());
-        QMessageBox::critical(nullptr, QObject::tr("failed"),
-                QObject::tr("ajout failed. \n"
-                                         "Click Cancel to exit."), QMessageBox::Cancel);
-
-    }
-
-}
-
-void MainWindow::on_suprimer_clicked()
-{
-
-
-        int id=ui->id_supp->text().toInt();
-  // T.setid(ui->id_supp->text().toInt());
-    bool test=T.supprimer(id);
-    QMessageBox msgBox;
-    if(test)
-    {
-    msgBox.setText("supprimer avec succes");
-    ui->tab_5->setModel(T.afficher());
-    ui->tab_6->setModel(T.afficher());
-    }
-    else
-        msgBox.setText("Echec de suppression");
-    msgBox.exec();
-}
-
-void MainWindow::on_modifier_clicked()
-{
-    int id=ui->id_2->text().toInt();
-    QString type=ui->type_2->text();
-    int duree=ui->duree_2->text().toInt();
-    int tmpMax=ui->tmpMax_2->text().toInt();
-    int tmpMin=ui->tempMin_2->text().toInt();
-    float prix=ui->prix_2->text().toFloat();
-    // Validate input fields
-    if (ui->id_2->text().isEmpty() || ui->type_2->text().isEmpty() || ui->duree_2->text().isEmpty() ||
-        ui->tmpMax_2->text().isEmpty() || ui->tempMin_2->text().isEmpty() || ui->prix_2->text().isEmpty()) {
-        QMessageBox::warning(this, "Input Error", "All fields must be filled out.");
-        return;
-    }
     if (id <= 0) {
         QMessageBox::warning(this, "Input Error", "ID must be a positive number.");
         return;
     }
+
     if (prix <= 0) {
         QMessageBox::warning(this, "Input Error", "prix must be a positive number.");
         return;
     }
 
+    traitementproduit T(id, type, duree, tmpMax, tmpMin, prix);
 
-       bool test=T.modifier(id, type, duree,  tmpMax,  tmpMin,prix);
-       QMessageBox msgBox;
+    bool test = T.ajouter();
+    QMessageBox msgBox;
+    if (test) {
+        msgBox.setText("Ajout avec succès");
+        ui->tab_5->setModel(T.afficher());
+        ui->tab_6->setModel(T.afficher());
+        ui->id->clear();
+        ui->duree->clear();
+        ui->tmpMax->clear();
+        ui->tmpMin->clear();
+        ui->prix->clear();
+    } else {
+        ui->tab_5->setModel(T.afficher());
+        ui->tab_6->setModel(T.afficher());
+        msgBox.setText("Echec d'ajout");
+    }
+    msgBox.exec();
+}
 
-       if(test){
-           msgBox.setText("modifiee avec succes.");
-            msgBox.exec();
-           ui->tab_5->setModel(T.afficher());
-           ui->tab_6->setModel(T.afficher());
-       }
+void MainWindow::on_suprimer_clicked()
+{
+    int id = ui->id_supp->text().toInt();
+    bool test = T.supprimer(id);
+    QMessageBox msgBox;
+    if (test) {
+        msgBox.setText("Supprimé avec succès");
+        ui->tab_5->setModel(T.afficher());
+        ui->tab_6->setModel(T.afficher());
+    } else {
+        msgBox.setText("Echec de suppression");
+    }
+    msgBox.exec();
+}
 
-       else{
-           msgBox.setText("Echec de modification");
-           msgBox.exec();
-           }
+void MainWindow::on_modifier_clicked()
+{
+    int id = ui->id_2->text().toInt();
+    QString type = ui->type_2->text();
+    int duree = ui->duree_2->text().toInt();
+    int tmpMax = ui->tmpMax_2->text().toInt();
+    int tmpMin = ui->tempMin_2->text().toInt();
+    float prix = ui->prix_2->text().toFloat();
+
+    if (ui->id_2->text().isEmpty() || ui->type_2->text().isEmpty() || ui->duree_2->text().isEmpty() ||
+        ui->tmpMax_2->text().isEmpty() || ui->tempMin_2->text().isEmpty() || ui->prix_2->text().isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "All fields must be filled out.");
+        return;
+    }
+
+    if (id <= 0) {
+        QMessageBox::warning(this, "Input Error", "ID must be a positive number.");
+        return;
+    }
+
+    if (prix <= 0) {
+        QMessageBox::warning(this, "Input Error", "prix must be a positive number.");
+        return;
+    }
+
+    bool test = T.modifier(id, type, duree, tmpMax, tmpMin, prix);
+    QMessageBox msgBox;
+    if (test) {
+        msgBox.setText("Modifié avec succès.");
+        ui->tab_5->setModel(T.afficher());
+        ui->tab_6->setModel(T.afficher());
+    } else {
+        msgBox.setText("Echec de modification");
+    }
+    msgBox.exec();
 }
 
 void MainWindow::on_afficher_clicked()
@@ -150,14 +150,11 @@ void MainWindow::on_afficher_clicked()
     ui->tab_6->setModel(T.afficher());
 }
 
-
 void MainWindow::on_trier_clicked()
 {
-    if (ui->tri_duree->isChecked())
-        {
-            ui->tab_tri->setModel(T.tri_duree());
-
-        }
+    if (ui->tri_duree->isChecked()) {
+        ui->tab_tri->setModel(T.tri_duree());
+    }
 }
 
 void MainWindow::on_rechercher_clicked()
@@ -168,44 +165,17 @@ void MainWindow::on_rechercher_clicked()
     QMessageBox msgBox;
 
     if (test) {
-        msgBox.setText("Recherche avec succès.");
+        msgBox.setText("Recherche réussie.");
         ui->tab_rech->setModel(T.rechercher(id));
     } else {
         msgBox.setText("Client inexistant");
-        msgBox.exec();
     }
+    msgBox.exec();
 }
-
-
-
-
 
 void MainWindow::on_pdf_clicked()
 {
     T.exportDataToPDF();
-}
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    T.exportDataToPDF();
-}
-
-void MainWindow::on_stats_clicked()
-{
-
-    QLayoutItem* item;
-    while ((item = ui->stats_3->layout()->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
-    QChartView *chartView = nullptr;
-
-
-        chartView = T.type1();
-
-        if (chartView != nullptr) {
-            ui->stats_3->layout()->addWidget(chartView);
-        }
 
 }
 
@@ -216,40 +186,66 @@ void MainWindow::on_qrCode_clicked()
     QString value = ui->qr_code_bar->text();
 
     if (value.isEmpty()) {
-        // Display an error message if the QR code field is empty
         QMessageBox::warning(this, "Error", "QR Code cannot be empty!");
     } else {
-      //  int id = value.toInt();  // Assuming the ID is an integer
+        QString text = "Traitement produit with ID: " + value + " is validated.";
+        QrCode qr = QrCode::encodeText(text.toUtf8().data(), QrCode::Ecc::MEDIUM);
 
-        // Check if the ID exists using the idExists function
+        qint32 sz = qr.getSize();
+        QImage im(sz, sz, QImage::Format_RGB32);
+        QRgb black = qRgb(9, 13, 12);
+        QRgb white = qRgb(255, 255, 255);
 
-            // Generate QR code if the ID exists
-            QString text = "traitement produit with id : " + value + " is valider.";
-
-            // Create the QR Code object
-            QrCode qr = QrCode::encodeText(text.toUtf8().data(), QrCode::Ecc::MEDIUM);
-
-            qint32 sz = qr.getSize();
-            QImage im(sz, sz, QImage::Format_RGB32);
-            QRgb black = qRgb(9, 13, 12);
-            QRgb white = qRgb(255, 255, 255);
-
-            for (int y = 0; y < sz; y++) {
-                for (int x = 0; x < sz; x++) {
-                    im.setPixel(x, y, qr.getModule(x, y) ? black : white);
-                }
-
-
-            ui->qrcodecommande_2->setPixmap(QPixmap::fromImage(im.scaled(200, 200, Qt::KeepAspectRatio, Qt::FastTransformation), Qt::MonoOnly));
+        for (int y = 0; y < sz; y++) {
+            for (int x = 0; x < sz; x++) {
+                im.setPixel(x, y, qr.getModule(x, y) ? black : white);
+            }
         }
+
+        ui->qrcodecommande_2->setPixmap(QPixmap::fromImage(im.scaled(200, 200, Qt::KeepAspectRatio, Qt::FastTransformation), Qt::MonoOnly));
     }
 }
 
 void MainWindow::on_rech_id_textChanged(const QString &arg1)
 {
-
     int id = arg1.toInt();
-    // Call the rechercher function with the selected option and input value
     ui->tab_5->setModel(T.rechercher(id));
     ui->tab_5->clearSelection();
+}
+
+void MainWindow::updateTemperatureLabel(const QString &temperature)
+{
+    if (temperature.isEmpty()) {
+       // ui->label_16->setText("Temperature: Error");
+    } else {
+        //ui->label_16->setText("Temperature: " + temperature + " °C");
+    }
+}
+
+void MainWindow::on_demandetT_clicked()
+{
+    qDebug() << "Button clicked: Requesting temperature from Arduino.";
+
+    if (!arduino || !arduino->serial) {
+        qDebug() << "Arduino object or serial pointer is null.";
+        //ui->label_16->setText("Error: Arduino not initialized.");
+        return;
+    }
+
+    if (arduino->serial->isOpen()) {
+        arduino->sendTemperatureRequest(); // Send the 'T' command to Arduino
+        QThread::msleep(100); // Allow time for response
+
+        if (arduino->serial->canReadLine()) {
+            QString response = QString::fromUtf8(arduino->serial->readLine().trimmed());
+            qDebug() << "Response from Arduino:" << response;
+          //  ui->label_16->setText("Temperature: " + response + " °C");
+        } else {
+            qDebug() << "No response from Arduino.";
+            //ui->label_16->setText("Error: No response.");
+        }
+    } else {
+        //ui->label_16->setText("Serial port not open.");
+        qDebug() << "Serial port is not open.";
+    }
 }

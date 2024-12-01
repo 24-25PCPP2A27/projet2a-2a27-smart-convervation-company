@@ -6,6 +6,8 @@
 #include <QString>
 #include <QSqlQueryModel>
 #include <QFileDialog>
+#include "arduino.h"
+#include <QSerialPortInfo>
 
 namespace Ui {
 class MainWindow;
@@ -43,9 +45,15 @@ private slots:
 
      void on_rech_id_textChanged(const QString &arg1);
 
+     void on_demandetT_clicked();
+
+     void updateTemperatureLabel(const QString &temperature);
+
 private:
     Ui::MainWindow *ui;
-    traitementproduit T;  // Instance de la classe traitementproduit
+    traitementproduit T; // Instance de la classe traitementproduit
+    Arduino *arduino;
+
 };
 
 #endif // MAINWINDOW_H

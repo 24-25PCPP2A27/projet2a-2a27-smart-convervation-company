@@ -1,20 +1,32 @@
 #ifndef ARDUINO_H
 #define ARDUINO_H
-#include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
-#include <QDebug>
-#include <QDate>
-#include <QString>
-#include <QSqlQueryModel>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QDateTime>
 
-class arduino
+#include <QObject>
+#include <QSerialPort>
+#include <QSerialPortInfo>
+
+class Arduino : public QObject
 {
+    Q_OBJECT
 public:
-    arduino();
+    explicit Arduino(QObject *parent = nullptr);
+    ~Arduino();
+
+    void openSerialPort();
+    void closeSerialPort();
+    void sendTemperatureRequest();
+    void readData();
+    QString getPortName() const;
+
+    QSerialPort *serial; // Make serial a public member
+
+private:
+    QString portName;
+    qint32 baudRate;
+
+signals:
+    void dataReceived(const QString &temperature); // Signal to notify data reception
+
 };
 
 #endif // ARDUINO_H

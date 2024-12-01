@@ -5,11 +5,11 @@
 #-------------------------------------------------
 QT+= core gui sql
 
-
+QT += serialport widgets
 
 QT+= sql
 QT += printsupport
-QT +=  printsupport
+
 QT += charts
 QT+= core gui sql network
 TARGET = Atelier_Connexion
