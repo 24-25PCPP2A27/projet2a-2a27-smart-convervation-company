@@ -1,0 +1,39 @@
+void MainWindow::on_tableView_repas_clicked(const QModelIndex &index)
+{
+    QAbstractItemModel* model = ui->tableView_repas->model();
+
+        int row = index.row();
+
+
+
+        QString ID = model->data(model->index(row, 0)).toString();
+        QString TYPE = model->data(model->index(row, 1)).toString();
+        QString PRIX = model->data(model->index(row, 2)).toString();
+
+ui->lineEdit->setText(ID);
+ui->lineEdit_2->setCurrentText(TYPE);
+ui->lineEdit_3->setText(PRIX);
+
+
+// Using QrCodegen to create a QR code from Facture attributes
+                 QString text = "ID: " + ID + "\n"
+                                 "TYPE: " + TYPE + "\n"
+                                 "PRIX: " + PRIX + "\n";
+
+ using namespace qrcodegen;
+QrCode qr = QrCode::encodeText(text.toUtf8().data(), QrCode::Ecc::MEDIUM);
+
+                 qint32 sz = qr.getSize();
+                 QImage im(sz, sz, QImage::Format_RGB32);
+                 QRgb black = qRgb(0, 0, 0);
+                 QRgb white = qRgb(255, 255, 255);
+
+                 for (int y = 0; y < sz; y++) {
+                     for (int x = 0; x < sz; x++) {
+                         im.setPixel(x, y, qr.getModule(x, y) ? black : white);
+                     }
+                 }
+                 ui->qrcode->setPixmap(QPixmap::fromImage(im.scaled(200, 200, Qt::KeepAspectRatio, Qt::FastTransformation), Qt::MonoOnly));
+
+
+}

@@ -14,12 +14,13 @@ private:
     QString etat;
     QString localisation;
     QString categorie;
-    double prix;
+    int prix;
+    QString image;
 
 public:
     Equipement();
     Equipement(int id, QString nom, QDate dateAquisition, QString etat,
-               QString localisation, QString categorie, double prix);
+               QString localisation, QString categorie, int prix,QString image);
 
     // Getters and setters
     QString getNom() const { return nom; }
@@ -28,7 +29,8 @@ public:
     QString getEtat() const { return etat; }
     QString getLocalisation() const { return localisation; }
     QString getCategorie() const { return categorie; }
-    double getPrix() const { return prix; }
+    int getPrix() const { return prix; }
+    QString getimage() const { return image; }
 
     void setNom(QString n) { nom = n; }
     void setID(int id) { this->id = id; }
@@ -36,7 +38,8 @@ public:
     void setEtat(QString e) { etat = e; }
     void setLocalisation(QString loc) { localisation = loc; }
     void setCategorie(QString cat) { categorie = cat; }
-    void setPrix(double p) { prix = p; }
+    void setPrix(int p) { prix = p; }
+    void setimage(QString p) { image = p; }
 
     bool ajouter();
     QSqlQueryModel* afficher();

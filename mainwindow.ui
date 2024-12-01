@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>970</width>
-    <height>444</height>
+    <width>1920</width>
+    <height>1080</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>961</width>
-      <height>311</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1920</width>
+      <height>1080</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -101,16 +101,6 @@
        <rect>
         <x>130</x>
         <y>20</y>
-        <width>113</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="le_etat">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>110</y>
         <width>113</width>
         <height>20</height>
        </rect>
@@ -206,7 +196,7 @@
        <rect>
         <x>420</x>
         <y>50</y>
-        <width>256</width>
+        <width>641</width>
         <height>192</height>
        </rect>
       </property>
@@ -244,7 +234,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Tri par nom</string>
+       <string>Tri par etat</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pb_Export">
@@ -289,9 +279,9 @@
      <widget class="QGraphicsView" name="graphicsView">
       <property name="geometry">
        <rect>
-        <x>690</x>
-        <y>50</y>
-        <width>256</width>
+        <x>480</x>
+        <y>280</y>
+        <width>631</width>
         <height>192</height>
        </rect>
       </property>
@@ -299,14 +289,88 @@
      <widget class="QPushButton" name="pushButton_Stats">
       <property name="geometry">
        <rect>
-        <x>800</x>
-        <y>260</y>
+        <x>770</x>
+        <y>500</y>
         <width>75</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Statistique</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="le_etat">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>110</y>
+        <width>111</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Fonctionnel</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>En panne</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>En maintenance</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QPushButton" name="inserer">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>370</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>inserer</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_image">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>240</y>
+        <width>171</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lien_image">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>360</y>
+        <width>113</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_qr">
+      <property name="geometry">
+       <rect>
+        <x>1130</x>
+        <y>70</y>
+        <width>241</width>
+        <height>171</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>
@@ -318,7 +382,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>970</width>
+     <width>1920</width>
      <height>22</height>
     </rect>
    </property>

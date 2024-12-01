@@ -4,23 +4,24 @@
 #include <QDebug>
 #include <QMap>
 
-Equipement::Equipement() : id(0), nom(""), dateAquisition(QDate()), etat(""), localisation(""), categorie(""), prix(0.0) {}
+Equipement::Equipement() : id(0), nom(""), dateAquisition(QDate()), etat(""), localisation(""), categorie(""), prix(0) {}
 
-Equipement::Equipement(int id, QString nom, QDate dateAquisition, QString etat, QString localisation, QString categorie, double prix)
-    : id(id), nom(nom), dateAquisition(dateAquisition), etat(etat), localisation(localisation), categorie(categorie), prix(prix) {}
+Equipement::Equipement(int id, QString nom, QDate dateAquisition, QString etat, QString localisation, QString categorie, int prix,QString image)
+    : id(id), nom(nom), dateAquisition(dateAquisition), etat(etat), localisation(localisation), categorie(categorie), prix(prix) ,image(image){}
 
 bool Equipement::ajouter() {
     QSqlQuery query;
-    query.prepare("INSERT INTO EQUIPEMENT (IDTR, NOM, DATE_AQUISITION, ETAT, LOCALISATION, CATEGORIE, PRIX) "
-                  "VALUES (:IDTR, :NOM, :DATE_AQUISITION, :ETAT, :LOCALISATION, :CATEGORIE, :PRIX)");
+    query.prepare("INSERT INTO EQUIPEMENT (IDEQ, NOM, DATE_AQUISITION, ETAT, LOCALISATION, CATEGORIE, PRIX,IMAGE) "
+                  "VALUES (:IDEQ, :NOM, :DATE_AQUISITION, :ETAT, :LOCALISATION, :CATEGORIE, :PRIX,:IMAGE)");
 
-    query.bindValue(":IDTR", id);
+    query.bindValue(":IDEQ", id);
     query.bindValue(":NOM", nom);
-    query.bindValue(":DATE_AQUISITION", dateAquisition.toString("dd-MM-yyyy")); // Date format as string
+    query.bindValue(":DATE_AQUISITION", dateAquisition); // Date format as string
     query.bindValue(":ETAT", etat);
     query.bindValue(":LOCALISATION", localisation);
     query.bindValue(":CATEGORIE", categorie);
     query.bindValue(":PRIX", prix);
+    query.bindValue(":IMAGE", image);
 
     return query.exec();
 }
@@ -28,7 +29,7 @@ bool Equipement::ajouter() {
 QSqlQueryModel* Equipement::afficher() {
     QSqlQueryModel *model = new QSqlQueryModel();
     model->setQuery("SELECT * FROM EQUIPEMENT");
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDTR"));
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDEQ"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("DATE_AQUISITION"));
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Etat"));
@@ -40,25 +41,25 @@ QSqlQueryModel* Equipement::afficher() {
 
 bool Equipement::supprimer(int id) {
     QSqlQuery query;
-    query.prepare("DELETE FROM EQUIPEMENT WHERE IDTR = :IDTR");
-    query.bindValue(":IDTR", id);
+    query.prepare("DELETE FROM EQUIPEMENT WHERE IDEQ = :IDEQ");
+    query.bindValue(":IDEQ", id);
     return query.exec();
 }
 
 bool Equipement::modifier() {
     QSqlQuery query;
     query.prepare("UPDATE EQUIPEMENT SET NOM = :NOM, DATE_AQUISITION = :DATE_AQUISITION, ETAT = :ETAT, "
-                  "LOCALISATION = :LOCALISATION, CATEGORIE = :CATEGORIE, PRIX = :PRIX "
-                  "WHERE IDTR = :IDTR");
+                  "LOCALISATION = :LOCALISATION, CATEGORIE = :CATEGORIE, PRIX = :PRIX ,IMAGE=:image "
+                  "WHERE IDEQ = :IDEQ");
 
-    query.bindValue(":IDTR", id);
+    query.bindValue(":IDEQ", id);
     query.bindValue(":NOM", nom);
-    query.bindValue(":DATE_AQUISITION", dateAquisition.toString("dd-MM-yyyy")); // Date as string
+    query.bindValue(":DATE_AQUISITION", dateAquisition); // Date as string
     query.bindValue(":ETAT", etat);
     query.bindValue(":LOCALISATION", localisation);
     query.bindValue(":CATEGORIE", categorie);
     query.bindValue(":PRIX", prix);
-
+    query.bindValue(":image", image);
     return query.exec();
 }
 
@@ -71,7 +72,7 @@ QSqlQueryModel* Equipement::rechercher(const QString &nom) {
     query.exec();
 
     model->setQuery(query);
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDTR"));
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDEQ"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Date d'Acquisition"));
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Etat"));
@@ -90,7 +91,7 @@ QSqlQueryModel* Equipement::afficherParEtat(bool ascending) {
             : "SELECT * FROM EQUIPEMENT ORDER BY ETAT DESC";
 
     model->setQuery(queryStr);
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDTR"));
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDEQ"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Date d'Acquisition"));
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Etat"));
