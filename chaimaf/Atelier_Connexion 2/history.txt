@@ -1,0 +1,24 @@
+Date: Sun Nov 17 14:41:15 2024, Type: Ajout, Details: Un client est ajoute: haha lol
+Date: Sun Nov 17 14:42:23 2024, Type: Suppression, Details: Supprimer client avec l'ID 5
+Date: Sun Nov 17 15:14:17 2024, Type: Ajout, Details: Un client est ajoute: a a
+Date: Sun Nov 17 15:17:22 2024, Type: Modification, Details: Un client a été modifie: haha ds
+Date: Sun Nov 17 15:17:35 2024, Type: Modification, Details: Un client a été modifie: haha sasa
+Date: Sun Nov 17 15:27:47 2024, Type: Ajout, Details: Un client est ajoute: po lds
+Date: Sun Nov 17 15:30:29 2024, Type: Modification, Details: Un client a été modifie: hrechi louay
+Date: Sun Nov 17 15:36:46 2024, Type: Ajout, Details: Un client est ajoute: lo dsq
+Date: Sun Nov 17 22:01:26 2024, Type: Ajout, Details: Un client est ajoute: adamm adamm
+Date: Sun Nov 17 22:53:04 2024, Type: Ajout, Details: Un client est ajoute: aaaaa aaaaa
+Date: Sun Nov 17 22:53:46 2024, Type: Modification, Details: Un client a été modifie: aaaaa aaaaa
+Date: Sun Nov 17 22:53:49 2024, Type: Suppression, Details: Supprimer client avec l'ID 1
+Date: Sun Nov 17 23:34:28 2024, Type: Ajout, Details: Un client est ajoute: aaaaaaaaaa aaaaaaaaaaa
+Date: Mon Nov 18 00:32:44 2024, Type: Ajout, Details: Un client est ajoute: bbbbb bbbb
+Date: Mon Nov 18 00:33:48 2024, Type: Ajout, Details: Un client est ajoute: ccccc cccccc
+Date: ??????? ?????? 18 01:28:41 2024, Type: Ajout, Details: Un client est ajoute: aroua sarra
+Date: Thu Nov 28 20:53:44 2024, Type: Ajout, Details: Un client est ajoute: lol ds
+Date: Thu Nov 28 20:54:00 2024, Type: Suppression, Details: Supprimer client avec l'ID 1
+Date: Thu Nov 28 20:54:04 2024, Type: Suppression, Details: Supprimer client avec l'ID 2
+Date: Thu Nov 28 20:54:08 2024, Type: Suppression, Details: Supprimer client avec l'ID 3
+Date: Thu Nov 28 23:53:21 2024, Type: Ajout, Details: Un client est ajouté: gg ez
+Date: Thu Nov 28 23:57:13 2024, Type: Ajout, Details: Un client est ajouté: louay hrechi
+Date: Fri Nov 29 00:08:48 2024, Type: Ajout, Details: Un client est ajouté: bijaoui chaima
+Date: ????? ?????? 30 13:11:57 2024, Type: Ajout, Details: Un client est ajouté: bejaoui chaima
