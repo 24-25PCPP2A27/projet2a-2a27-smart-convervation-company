@@ -4,12 +4,12 @@
 #include <QSqlError>
 #include <QDebug>
 #include <QRegExp>
-
+#include <QString>
 #include <QPdfWriter>
 #include <QPainter>
-
+#include <QDialog>
 #include <QUuid>
-Employe::Employe(int id, QString nom, QString prenom, QString email, QString mot_de_passe, QString date_dembau, int sal, int telephone) {
+Employe::Employe(int id, QString nom, QString prenom, QString email, QString mot_de_passe, QString date_dembau, int sal, QString telephone ,QString post) {
     this->idEm = id;
     this->nom = nom;
     this->prenom = prenom;
@@ -18,9 +18,11 @@ Employe::Employe(int id, QString nom, QString prenom, QString email, QString mot
     this->date_dembau = date_dembau;
     this->sal = sal;
     this->telephone = telephone;
+    this->post = post;
 }
 
 Employe::Employe() {}
+
 
 QString Employe::getLastError() const {
     return lastErrorMessage;
@@ -51,9 +53,9 @@ bool Employe::ajouter() {
     }
 
     QSqlQuery query;
-    query.prepare("INSERT INTO EMPLOYE (IDEM, NOM, PRENOM, EMAIL, MOT_DE_PASSE, DATE_D_EMBAUCHE, SALAIRE, TELEPHONE, RFID) "
-                  "VALUES (:idEm, :nom, :prenom, :email, :mot_de_passe, :date_dembau, :sal, :telephone, :rfid)");
-    query.bindValue(":rfid", rfid);
+    query.prepare("INSERT INTO EMPLOYE (IDEM, NOM, PRENOM, EMAIL, MOT_DE_PASSE, DATE_D_EMBAUCHE, SALAIRE, TELEPHONE, RFID ,POST) "
+                  "VALUES (:idEm, :nom, :prenom, :email, :mot_de_passe, :date_dembau, :sal, :telephone, :rfid ,:post)");
+
     query.bindValue(":idEm", idEm);
     query.bindValue(":nom", nom);
     query.bindValue(":prenom", prenom);
@@ -63,12 +65,13 @@ bool Employe::ajouter() {
     query.bindValue(":sal", sal);
     query.bindValue(":telephone", telephone);
     query.bindValue(":rfid", rfid);
+    query.bindValue(":post", post);
     qDebug() << "Executing query:" << query.executedQuery();
     qDebug() << "idEm:" << idEm << ", nom:" << nom << ", prenom:" << prenom
              << ", email:" << email << ", mot_de_passe:" << mot_de_passe
              << ", date_dembau:" << date_dembau << ", sal:" << sal
              << ", telephone:" << telephone
-               << ", rfid:" << rfid ;
+               << ", rfid:" << rfid << ", post:" << post;
 
     if (!query.exec()) {
         qDebug() << "Error executing query:" << query.lastError().text();
@@ -90,8 +93,8 @@ bool Employe::modifier() {
     }
 
     QSqlQuery query;
-    query.prepare("UPDATE EMPLOYE SET NOM = :nom, PRENOM = :prenom, EMAIL = :email, MOT_DE_PASSE = :mot_de_passe, "
-                  "DATE_D_EMBAUCHE = :date_dembau, SALAIRE = :sal, TELEPHONE = :telephone , RFID = : RFID"
+    query.prepare("UPDATE EMPLOYE SET NOM = :nom, PRENOM = :prenom, EMAIL = :email, MOT_DE_PASSE = :mot_de_passe, POST=:post "
+                  "DATE_D_EMBAUCHE = :date_dembau, SALAIRE = :sal, TELEPHONE = :telephone , RFID = : RFID , POST = :post"
                   "WHERE IDEM = :idEm");
     query.bindValue(":idEm", idEm);
     query.bindValue(":nom", nom);
@@ -102,6 +105,7 @@ bool Employe::modifier() {
     query.bindValue(":sal", sal);
     query.bindValue(":telephone", telephone);
     query.bindValue(": RFID", rfid);
+    query.bindValue(": POST", post);
     if (!query.exec()) {
         qDebug() << "Error executing query:" << query.lastError().text();
         setLastError(query.lastError().text());
@@ -134,14 +138,16 @@ QSqlQueryModel* Employe::afficher() {
     QSqlQueryModel *model = new QSqlQueryModel();
     model->setQuery("SELECT * FROM EMPLOYE");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("IdEm"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prénom"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Email"));
-    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Mot de passe"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr(" Email"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Mot de passe"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Nom"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Prénom"));
     model->setHeaderData(5, Qt::Horizontal, QObject::tr("Date d'embauche"));
     model->setHeaderData(6, Qt::Horizontal, QObject::tr("Salaire"));
     model->setHeaderData(7, Qt::Horizontal, QObject::tr("Téléphone"));
     model->setHeaderData(8, Qt::Horizontal, QObject::tr("rfid"));
+    model->setHeaderData(9, Qt::Horizontal, QObject::tr("post"));
+
     return model;
 }
 
@@ -164,6 +170,8 @@ QSqlQueryModel* Employe::rechercherParNomEtPrenom(const QString &nom, const QStr
         model->setHeaderData(6, Qt::Horizontal, QObject::tr("Salaire"));
         model->setHeaderData(7, Qt::Horizontal, QObject::tr("Téléphone"));
         model->setHeaderData(8, Qt::Horizontal, QObject::tr("rfid"));
+        model->setHeaderData(9, Qt::Horizontal, QObject::tr("post"));
+
     } else {
         qDebug() << "Error executing query:" << query.lastError().text();
         setLastError(query.lastError().text());
@@ -193,7 +201,8 @@ QSqlQueryModel* Employe::trierParSalaire()
         model->setHeaderData(5, Qt::Horizontal, QObject::tr("Date d'embauche"));
         model->setHeaderData(6, Qt::Horizontal, QObject::tr("Salaire"));
         model->setHeaderData(7, Qt::Horizontal, QObject::tr("Téléphone"));
-        model->setHeaderData(7, Qt::Horizontal, QObject::tr("rfid"));
+        model->setHeaderData(8, Qt::Horizontal, QObject::tr("rfid"));
+        model->setHeaderData(9, Qt::Horizontal, QObject::tr("post"));
 
         return model;
 }
@@ -263,3 +272,113 @@ bool Employe::resetPassword(const QString& email) {
         return false;
     }
 }
+
+
+bool Employe::recupererEmploye(const QString &email, const QString &password, Employe &employee) {
+QSqlDatabase db = QSqlDatabase::database();
+    if (!db.open()) {
+        qDebug() << "Database connection error:" << db.lastError().text();
+        return false;
+    }
+
+    QSqlQuery query;
+    query.prepare("SELECT * FROM EMPLOYE WHERE EMAIL = :email AND MOT_DE_PASSE = :password");
+    query.bindValue(":email", email);
+    query.bindValue(":password", password);
+
+    if (!query.exec()) {
+        qDebug() << "Query execution error:" << query.lastError().text();
+        db.close();
+        return false;
+    }
+
+    if (query.next()) {
+
+        employee.setIdEm(query.value("idEm").toInt());
+                employee.setNom(query.value("nom").toString());
+                employee.setPrenom(query.value("prenom").toString());
+                employee.setEmail(query.value("email").toString());
+                employee.setMotDePasse(query.value("mot_de_passe").toString());
+                employee.setDateDembau(query.value("date_dembau").toString());
+                employee.setSalaire(query.value("sal").toInt());
+                employee.setTelephone(query.value("telephone").toString());
+                employee.setRfid(query.value("rfid").toString());
+        db.close();
+        return true;
+    } else {
+        db.close();
+        return false; // Employee not found
+    }
+}
+
+// Getters
+int Employe::getIdEm() const {
+    return idEm;
+}
+
+QString Employe::getNom() const {
+    return nom;
+}
+
+QString Employe::getPrenom() const {
+    return prenom;
+}
+
+QString Employe::getEmail() const {
+    return email;
+}
+
+QString Employe::getMotDePasse() const {
+    return mot_de_passe;
+}
+
+QString Employe::getDateDembau() const {
+    return date_dembau;
+}
+
+int Employe::getSalaire() const {
+    return sal;
+}
+
+QString Employe::getTelephone() const {
+    return telephone;
+}
+
+QString Employe::getpost() const {
+    return post;
+}
+
+// Setters
+void Employe::setIdEm(int idEm) {
+    this->idEm = idEm;
+}
+
+void Employe::setNom(const QString &nom) {
+    this->nom = nom;
+}
+
+void Employe::setPrenom(const QString &prenom) {
+    this->prenom = prenom;
+}
+
+void Employe::setEmail(const QString &email) {
+    this->email = email;
+}
+
+void Employe::setMotDePasse(const QString &mot_de_passe) {
+    this->mot_de_passe = mot_de_passe;
+}
+
+void Employe::setDateDembau(const QString &date_dembau) {
+    this->date_dembau = date_dembau;
+}
+
+void Employe::setSalaire(int sal) {
+    this->sal = sal;
+}
+
+void Employe::setTelephone(const QString &telephone) {
+    this->telephone = telephone;
+}
+
+

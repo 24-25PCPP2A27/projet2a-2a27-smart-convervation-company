@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>bienvenue</class>
+ <widget class="QDialog" name="bienvenue">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1182</width>
+    <height>771</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>90</y>
+     <width>231</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 20pt &quot;Sitka&quot;;
+background-color: rgb(157, 255, 177);
+border-radius: 10px;</string>
+   </property>
+   <property name="text">
+    <string>    BIENVENUE</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="identifier">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>230</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>E-MAIL</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="password">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>320</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
+   <property name="placeholderText">
+    <string>MOYT DE PASSE</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>480</y>
+     <width>121</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(53, 255, 8);</string>
+   </property>
+   <property name="text">
+    <string>annuler</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>480</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 10pt &quot;MS Sans Serif&quot;;
+background-color: rgb(85, 170, 0);</string>
+   </property>
+   <property name="text">
+    <string>connecter</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>380</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>VOTRE RFID :</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="rfidLabel">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>380</y>
+     <width>151</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

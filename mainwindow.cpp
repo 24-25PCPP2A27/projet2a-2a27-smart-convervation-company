@@ -25,18 +25,20 @@
 #include <QAbstractItemModel>
 
 #include "arduino.h"
-
+#include "employe.h"
 
 
 using namespace QtCharts;
 
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(const Employe &employe,QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+  currentEmploye(employe)
 {
     ui->setupUi(this);
 
+    populateFields();
     // Initialize Arduino for RFID reading
     arduino = new Arduino(this);  // Create an instance of the Arduino class
 
@@ -54,6 +56,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete arduino;  // Clean up Arduino instance
+
 }
 void MainWindow::clearInputFields() {
     ui->idEm->clear();
@@ -64,6 +67,9 @@ void MainWindow::clearInputFields() {
     ui->date_dembau->clear();
     ui->salaire->clear();
     ui->telephone->clear();
+    ui->post->clear();
+    ui->rfidLabel->clear();
+
 }
 void MainWindow::on_mody_Button_6_clicked() {
     int idEm = ui->idEm->text().toInt();
@@ -73,17 +79,18 @@ void MainWindow::on_mody_Button_6_clicked() {
     QString mot_de_passe = ui->mot_de_passe->text();
     QString date_dembau = ui->date_dembau->text();
     int sal = ui->salaire->text().toInt();
-    int telephone = ui->telephone->text().toInt();
-
+    QString  telephone = ui->telephone->text();
+    QString post = ui->post->text();
+    QString rfid = ui->rfidLabel->text();
     // Validate fields
     if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || mot_de_passe.isEmpty() ||
-        date_dembau.isEmpty() || sal <= 0 || telephone <= 0) {
+        date_dembau.isEmpty() || sal <= 0 || telephone.isEmpty()|| post.isEmpty() || rfid.isEmpty()) {
         QMessageBox::warning(this, tr("Input Error"), tr("All fields must be filled correctly."));
         return;
     }
 
     // Create and add employee
-    Employe employe(idEm, nom, prenom, email, mot_de_passe, date_dembau, sal, telephone);
+    Employe employe(idEm, nom, prenom, email, mot_de_passe, date_dembau, sal, telephone,post);
     employe.setRfid(rfid);
     if (employe.ajouter()) {
         QMessageBox::information(this, tr("Success"), tr("Employee added successfully."));
@@ -121,17 +128,19 @@ void MainWindow::on_mody_Button_4_clicked()
     QString mot_de_passe = ui->mot_de_passe->text();
     QString date_dembau = ui->date_dembau->text();
     int sal = ui->salaire->text().toInt();
-    int telephone = ui->telephone->text().toInt();
+    QString telephone = ui->telephone->text();
+    QString post= ui->post->text();
+    QString rfid= ui->rfidLabel->text();
 
     if (ui->idEm->text().isEmpty() || ui->nom->text().isEmpty() || ui->prenom->text().isEmpty() ||
         ui->email->text().isEmpty() || ui->mot_de_passe->text().isEmpty() || ui->date_dembau->text().isEmpty() ||
-        ui->salaire->text().isEmpty() || ui->telephone->text().isEmpty())
+        ui->salaire->text().isEmpty() || ui->telephone->text().isEmpty() || ui->post->text().isEmpty() || ui->rfidLabel->text().isEmpty())
     {
         QMessageBox::warning(this, "Input Error", "All fields must be filled out.");
         return;
     }
 
-    Employe employe(idEm, nom, prenom, email, mot_de_passe, date_dembau, sal, telephone);
+    Employe employe(idEm, nom, prenom, email, mot_de_passe, date_dembau, sal, telephone,post );
     bool test = employe.modifier();
 
     if (test) {
@@ -145,6 +154,7 @@ void MainWindow::on_mody_Button_4_clicked()
         ui->date_dembau->clear();
         ui->salaire->clear();
         ui->telephone->clear();
+        ui->rfidLabel->clear();
     } else {
         QMessageBox::critical(this, "Update Failed", "Failed to update employee.");
     }
@@ -313,18 +323,17 @@ void MainWindow::on_pushButton_clicked()
         QMessageBox::information(this, tr("Export Successful"), tr("PDF has been saved successfully."));
 }
 
-void MainWindow::on_pushButton_2_clicked()
-{
-    Employe employe;
-        QString email = QInputDialog::getText(this, "Mot de passe oublié", "Entrez votre e-mail:");
-        if (email.isEmpty()) {
-            QMessageBox::warning(this, "Erreur", "Veuillez entrer un e-mail.");
-            return;
-        }
 
-        if (employe.resetPassword(email)) {
-            QMessageBox::information(this, "Succès", "Un nouveau mot de passe a été envoyé à votre e-mail.");
-        } else {
-            QMessageBox::critical(this, "Erreur", "L'e-mail n'existe pas dans la base de données.");
-        }
+void MainWindow::populateFields()
+{
+    ui->idEm->setText(QString::number(currentEmploye.getIdEm()));
+    ui->nom->setText(currentEmploye.getNom());
+    ui->prenom->setText(currentEmploye.getPrenom());
+    ui->email->setText(currentEmploye.getEmail());
+    ui->mot_de_passe->setText(currentEmploye.getMotDePasse());
+    ui->date_dembau->setText(currentEmploye.getDateDembau());
+    ui->salaire->setText(QString::number(currentEmploye.getSalaire()));
+    ui->telephone->setText(currentEmploye.getTelephone());
+    ui->post->setText(currentEmploye.getpost());
+    ui->rfidLabel->setText(currentEmploye.getpost());
 }

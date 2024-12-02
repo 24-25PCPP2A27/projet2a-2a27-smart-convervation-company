@@ -7,7 +7,7 @@
 QT       += core gui sql charts
 QT+=sql
 QT += serialport
-
+QT += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,18 +30,23 @@ CONFIG += c++11
 
 SOURCES += \
     arduino.cpp \
+    bienvenue.cpp \
     employe.cpp \
         main.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    smtp.cpp
 
 HEADERS += \
     arduino.h \
+    bienvenue.h \
     employe.h \
         mainwindow.h \
-    connection.h
+    connection.h \
+    smtp.h
 
 FORMS += \
+        bienvenue.ui \
         mainwindow.ui
 
 # Default rules for deployment.

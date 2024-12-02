@@ -12,7 +12,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+
+    explicit MainWindow(const Employe &employe, QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
@@ -29,18 +30,23 @@ private slots:
     void on_mody_Button_10_clicked();
 
     void onTagScanned(const QString &uid);
+
     void on_mody_Button_9_clicked();
 
     void on_mody_Button_8_clicked();
 
     void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
+
+
+
 
 private:
     Ui::MainWindow *ui;
     Employe e;
     Arduino *arduino;
+    Employe currentEmploye;
+    void populateFields();
     QString rfid;  // To store the scanned RFID UID
     void readDataFromArduino();
 };

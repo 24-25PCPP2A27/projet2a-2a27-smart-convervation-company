@@ -1,10 +1,10 @@
 #ifndef EMPLOYE_H
 #define EMPLOYE_H
-
+#include <QWidget>
 #include <QString>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
-
+#include <QDialog>
 class Employe
 {
 private:
@@ -16,7 +16,8 @@ private:
     QString mot_de_passe;
     QString date_dembau;
     int sal;
-    int telephone;
+    QString telephone;
+    QString post;
     QString rfid;
     QString lastErrorMessage;
 
@@ -24,7 +25,7 @@ public:
 
     Employe();
     Employe(int id, QString nom, QString prenom, QString email,
-             QString mot_de_passe,  QString date_dembau, int sal, int telephone);
+             QString mot_de_passe,  QString date_dembau, int sal, QString telephone,QString post);
 
     // Getters
     int getIdEm() const;
@@ -34,7 +35,8 @@ public:
     QString getMotDePasse() const;
     QString getDateDembau() const;
     int getSalaire() const;
-    int getTelephone() const;
+    QString getTelephone() const;
+    QString getpost() const;
 
     // Setters
     void setIdEm(int idEm);
@@ -44,8 +46,8 @@ public:
     void setMotDePasse(const QString &mot_de_passe);
     void setDateDembau(const QString &date_dembau);
     void setSalaire(int sal);
-    void setTelephone(int telephone);
-
+    void setTelephone(const QString &telephone);
+    void setpost(int post);
     void setRfid(const QString &rfidValue) { rfid = rfidValue; }
     QString getRfid() const { return rfid; }
 
@@ -54,7 +56,7 @@ public:
     bool modifier();
     QSqlQueryModel* afficher();
     QSqlQueryModel* rechercherParNomEtPrenom(const QString &nom, const QString &prenom);
-
+     static bool recupererEmploye(const QString &email, const QString &password, Employe &employee);
 
     QString getLastError() const;
     void setLastError(const QString &error);
