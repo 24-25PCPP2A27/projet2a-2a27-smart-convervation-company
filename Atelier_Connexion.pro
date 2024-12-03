@@ -35,6 +35,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
+    mdpoublie.cpp \
     smtp.cpp
 
 HEADERS += \
@@ -43,13 +44,18 @@ HEADERS += \
     employe.h \
         mainwindow.h \
     connection.h \
+    mdpoublie.h \
     smtp.h
 
 FORMS += \
         bienvenue.ui \
-        mainwindow.ui
+        mainwindow.ui \
+        mdpoublie.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    images.qrc

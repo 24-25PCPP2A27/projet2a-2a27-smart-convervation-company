@@ -41,6 +41,8 @@ private slots:
 
 
 
+    void on_mody_Button_12_clicked();
+
 private:
     Ui::MainWindow *ui;
     Employe e;

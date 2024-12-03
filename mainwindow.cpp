@@ -337,3 +337,18 @@ void MainWindow::populateFields()
     ui->post->setText(currentEmploye.getpost());
     ui->rfidLabel->setText(currentEmploye.getpost());
 }
+
+void MainWindow::on_mody_Button_12_clicked()
+{
+    ui->idEm->clear();
+    ui->nom->clear();
+    ui->prenom->clear();
+    ui->email->clear();
+    ui->mot_de_passe->clear();
+    ui->date_dembau->clear();
+    ui->telephone->clear();
+    ui->salaire->clear();
+    ui->post->clear();
+    ui->rfidLabel->clear();
+
+}

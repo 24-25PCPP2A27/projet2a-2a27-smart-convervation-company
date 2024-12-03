@@ -239,7 +239,7 @@ border-color: rgb(0, 85, 0);</string>
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap>../../../PHOTO.png</pixmap>
+           <pixmap resource="images.qrc">:/new/prefix1/photo2.png</pixmap>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -1716,7 +1716,7 @@ color: #72C04E;
           <property name="geometry">
            <rect>
             <x>790</x>
-            <y>120</y>
+            <y>160</y>
             <width>201</width>
             <height>21</height>
            </rect>
@@ -1732,7 +1732,7 @@ color: #72C04E;
           <property name="geometry">
            <rect>
             <x>840</x>
-            <y>70</y>
+            <y>110</y>
             <width>111</width>
             <height>31</height>
            </rect>
@@ -2044,8 +2044,8 @@ color: #72C04E;
          <widget class="QLineEdit" name="post">
           <property name="geometry">
            <rect>
-            <x>260</x>
-            <y>270</y>
+            <x>240</x>
+            <y>280</y>
             <width>161</width>
             <height>31</height>
            </rect>
@@ -2058,6 +2058,142 @@ color: #72C04E;
           </property>
           <property name="placeholderText">
            <string>post</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="mody_Button_12">
+          <property name="geometry">
+           <rect>
+            <x>610</x>
+            <y>70</y>
+            <width>131</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>ANNULER</string>
           </property>
          </widget>
         </widget>
@@ -2397,6 +2533,8 @@ QCalendarWidget QWidget#qt_calendar_navigationbar {
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

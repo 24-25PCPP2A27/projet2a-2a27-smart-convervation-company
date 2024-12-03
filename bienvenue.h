@@ -27,6 +27,8 @@ private slots:
     void slot_emailStatus(QString message);
 
 
+    void on_pushButton_3_clicked();
+
 private:
     Ui::bienvenue *ui;
     Arduino *arduino;

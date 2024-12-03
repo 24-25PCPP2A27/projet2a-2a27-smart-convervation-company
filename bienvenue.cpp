@@ -11,7 +11,7 @@
 #include "employe.h"
 #include <QDebug>
 #include <QTime>
-
+#include "mdpoublie.h"
 bienvenue::bienvenue(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::bienvenue)
@@ -67,7 +67,7 @@ void bienvenue::on_pushButton_clicked()
     QString email = ui->identifier->text();
         QString password = ui->password->text();
     ui->rfidLabel->setText(rfid);
-
+    QString post = ui->post->text();
 
 
         if (email.isEmpty() || !email.contains("@") || !email.contains(".")) {
@@ -84,10 +84,10 @@ void bienvenue::on_pushButton_clicked()
 
         Employe employee;
         if (Employe::recupererEmploye(email, password, employee)) {
-            if (rfid.isEmpty()) {
+            /*if (rfid.isEmpty()) {
                         QMessageBox::warning(this, "RFID Error", "RFID value is empty. Please scan a valid RFID tag.");
                         return;
-                    }
+                    }*/
 
                     // Ensure database connection is open
                     if (!QSqlDatabase::database().isOpen()) {
@@ -97,13 +97,15 @@ void bienvenue::on_pushButton_clicked()
 
                     // Check if RFID exists in the database
                     QSqlQuery query;
-                    query.prepare("SELECT COUNT(*) FROM employe WHERE RFID = :rfid");
-                    query.bindValue(":rfid", rfid);
+                    if (post == "employe") {
+                        query.prepare("SELECT COUNT(*) FROM employe WHERE POST = :post");
+                        query.bindValue(":post", post);
 
-                    if (query.exec() && query.next()) {
+
+                        if (query.exec() && query.next()) {
                         int count = query.value(0).toInt();
                         if (count > 0) {
-                            QMessageBox::information(this, "Login Successful", "Bienvenue, " + employee.getNom() + "! RFID recognized.");
+                            QMessageBox::information(this, "Login Successful", "Bienvenue, " + employee.getNom() );
                             QString recipientEmail = ui->identifier->text();
 
                                 // Hardcoded sender details
@@ -140,16 +142,17 @@ void bienvenue::on_pushButton_clicked()
                             mainWindow->show();
 
                             this->close();
-                        } else {
+                        } /*else {
                             QMessageBox::warning(this, "RFID Not Found", "RFID does not exist in the database. Access denied.");
-                        }
+                        }*/
                     } else {
                         QMessageBox::critical(this, "Database Error", "Failed to query the database for RFID. Error: " + query.lastError().text());
                         qDebug() << "Query Error: " << query.lastError().text();
                     }
                 } else {
-                    QMessageBox::warning(this, "Login Failed", "Email or password is incorrect. Please try again.");
-                }
+                    QMessageBox::warning(this, "Login Failed", "Email or password or post is incorrect. Please try again.");
+                }}
+        //hnneee tet7at l khedma mtaa kol whd
 }
 
 void bienvenue::on_pushButton_2_clicked()
@@ -157,6 +160,7 @@ void bienvenue::on_pushButton_2_clicked()
        ui->identifier->clear();
        ui->password->clear();
        ui->rfidLabel->clear();
+        ui->post->clear();
 }
 void bienvenue::on_identifier_cursorPositionChanged(int oldPos, int newPos)
 {
@@ -175,3 +179,10 @@ void bienvenue::slot_emailStatus(QString message)
         QMessageBox::critical(this, "Email Status", "Failed to send email: " + message);
     }
 }
+
+void bienvenue::on_pushButton_3_clicked()
+{
+
+        mdpoublie forgotPasswordDialog(this);
+        forgotPasswordDialog.exec();
+    }
