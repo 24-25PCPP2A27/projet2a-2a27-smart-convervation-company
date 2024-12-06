@@ -8,12 +8,19 @@ QT       += core gui sql charts
 QT+=sql
 QT += serialport
 QT += network
-
+QT       += core gui sql
+QT += printsupport
+QT       += core gui sql printsupport
+QT       += core gui axcontainer
+QT += core gui widgets sql
+QT += core gui charts
+QT += charts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Atelier_Connexion
 TEMPLATE = app
 QT += printsupport
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -30,7 +37,9 @@ CONFIG += c++11
 
 SOURCES += \
     arduino.cpp \
+    arduinocl.cpp \
     bienvenue.cpp \
+    client.cpp \
     employe.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -40,7 +49,9 @@ SOURCES += \
 
 HEADERS += \
     arduino.h \
+    arduinocl.h \
     bienvenue.h \
+    client.h \
     employe.h \
         mainwindow.h \
     connection.h \
@@ -50,6 +61,7 @@ HEADERS += \
 FORMS += \
         bienvenue.ui \
         mainwindow.ui \
+        mainwindowcl.ui \
         mdpoublie.ui
 
 # Default rules for deployment.

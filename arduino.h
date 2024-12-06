@@ -18,8 +18,12 @@ public:
 signals:
     void tagScanned(const QString &uid);
 
-private slots:
+
+
+public slots:
     void readData();
+    //void writeData(const QByteArray &data);
+    int write_arduino(QByteArray data);
 
 private:
     QSerialPort *arduino;

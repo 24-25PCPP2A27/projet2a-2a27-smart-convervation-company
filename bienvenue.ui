@@ -18,7 +18,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1171</width>
+     <width>1191</width>
      <height>661</height>
     </rect>
    </property>
@@ -89,7 +89,7 @@ background-color: rgb(157, 255, 177);
 border-radius: 10px;</string>
    </property>
    <property name="text">
-    <string>    BIENVENUE</string>
+    <string>  BIENVENUE</string>
    </property>
   </widget>
   <widget class="QLabel" name="rfidLabel">

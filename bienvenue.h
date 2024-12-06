@@ -17,6 +17,7 @@ class bienvenue : public QDialog
 public:
     explicit bienvenue( QWidget *parent = nullptr);
     ~bienvenue();
+    void readDataFromArduino();
 
 private slots:
     void on_pushButton_clicked();
@@ -33,7 +34,7 @@ private:
     Ui::bienvenue *ui;
     Arduino *arduino;
     QString rfid;  // To store the scanned RFID UID
-    void readDataFromArduino();
+
     bool checkRfidInDatabase(const QString &uid); // Check if RFID exists in database
     Smtp *m_smtp;
 };

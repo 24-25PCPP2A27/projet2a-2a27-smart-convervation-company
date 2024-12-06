@@ -273,7 +273,73 @@ bool Employe::resetPassword(const QString& email) {
     }
 }
 
+bool Employe::recupererEmployeByRFID(const QString &rfid, Employe &employee) {
 
+    QSqlDatabase db = QSqlDatabase::database();
+
+    if (!db.open()) {
+
+        qDebug() << "Database connection error:" << db.lastError().text();
+
+        return false;
+
+    }
+
+
+
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM EMPLOYE WHERE RFID = :rfid");
+
+    query.bindValue(":rfid", rfid);
+
+
+
+    if (!query.exec()) {
+
+        qDebug() << "Query execution error:" << query.lastError().text();
+
+        db.close();
+
+        return false;
+
+    }
+
+
+
+    if (query.next()) {
+
+        employee.setIdEm(query.value("idEm").toInt());
+
+        employee.setNom(query.value("nom").toString());
+
+        employee.setPrenom(query.value("prenom").toString());
+
+        employee.setEmail(query.value("email").toString());
+
+        employee.setMotDePasse(query.value("mot_de_passe").toString());
+
+        employee.setDateDembau(query.value("date_dembau").toString());
+
+        employee.setSalaire(query.value("sal").toInt());
+
+        employee.setTelephone(query.value("telephone").toString());
+
+        employee.setRfid(query.value("rfid").toString());
+
+        db.close();
+
+        return true;
+
+    } else {
+
+        db.close();
+
+        return false; // Employee not found
+
+    }
+
+}
 bool Employe::recupererEmploye(const QString &email, const QString &password, Employe &employee) {
 QSqlDatabase db = QSqlDatabase::database();
     if (!db.open()) {
@@ -355,6 +421,9 @@ void Employe::setIdEm(int idEm) {
 
 void Employe::setNom(const QString &nom) {
     this->nom = nom;
+}
+void Employe::setpost(QString post) {
+    this->post = post;
 }
 
 void Employe::setPrenom(const QString &prenom) {

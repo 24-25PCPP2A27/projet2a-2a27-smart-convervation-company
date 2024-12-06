@@ -21,7 +21,7 @@ Arduino::Arduino(QObject *parent) : QObject(parent)
         arduino->setStopBits(QSerialPort::OneStop);
         arduino->setFlowControl(QSerialPort::NoFlowControl);
 
-        if (!arduino->open(QIODevice::ReadOnly)) {
+        if (!arduino->open(QIODevice::ReadWrite)) {
             qDebug() << "Failed to open serial port:" << arduino->errorString();
         } else {
             connect(arduino, &QSerialPort::readyRead, this, &Arduino::readData);
@@ -40,7 +40,16 @@ bool Arduino::isAvailable() const
 {
     return !arduino->portName().isEmpty();  // Returns true if a valid port is assigned
 }
-
+int Arduino::write_arduino(QByteArray data) {
+    if (arduino->isOpen()) {
+        arduino->write(data);
+        qDebug() << "Data written to Arduino: " << data;
+        return 0; // Success: Data written to Arduino
+    } else {
+        qDebug() << "Serial port is not open. Cannot write data.";
+        return 1; // Error: Serial port not open
+    }
+}
 void Arduino::readData()
 {
     static QString buffer;  // Persistent buffer to store incoming data

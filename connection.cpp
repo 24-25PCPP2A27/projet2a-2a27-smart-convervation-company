@@ -6,18 +6,19 @@ Connection::Connection()
 }
 
 bool Connection::createconnect()
-{
-    bool test = false;
+{bool test=false;
+QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
+db.setDatabaseName("Source_Project2A");
+db.setUserName("root");//inserer nom de l'utilisateur
+db.setPassword("root");//inserer mot de passe de cet utilisateur
+
+if (db.open())
+test=true;
 
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-    db.setHostName("localhost");
-    db.setDatabaseName("Source_Projet2A");
-    db.setUserName("sarra");
-    db.setPassword("freshtrack");
 
-    if (db.open())
-        test = true;
 
-    return test;
+
+    return  test;
 }
+void Connection::closeconnection(){db.close();}

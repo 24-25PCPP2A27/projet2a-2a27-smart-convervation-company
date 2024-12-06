@@ -1,29 +1,8 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "employe.h"
-#include <QMessageBox>
-#include <QIntValidator>
-#include <QSqlQueryModel>
-#include <QString>
-#include <QSqlQuery>
-#include <QDialog>
-#include <QDebug>
-#include <QSqlError>
-
-#include <QtCharts/QChartView>
-#include <QtCharts/QBarSet>
-#include <QtCharts/QBarSeries>
-#include <QtCharts/QValueAxis>
-#include <QtCharts/QBarCategoryAxis>
+#include "mainwindowcl.h"
+#include "ui_mainwindowcl.h"
+#include "arduinocl.h"
 #include "client.h" // Include the client header
 #include "connection.h"
-#include <QFileDialog>
-#include <QInputDialog>
-
-#include <QFileDialog>
-#include <QPrinter>
-#include <QPainter>
-#include <QAbstractItemModel>
 #include <QDebug>
 #include <QPrinter>
 #include <QFile>
@@ -38,363 +17,113 @@
 #include <QtCharts/QPieSlice>
 #include <QChartView>
 #include <QVBoxLayout>
-#include "arduino.h"
-#include "employe.h"
-
 
 using namespace QtCharts;
 
-
-MainWindow::MainWindow(const Employe &employe,QWidget *parent) :
+mainwindowcl::mainwindowcl(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-  currentEmploye(employe)
+    ui(new Ui::mainwindowcl)
 {
     ui->setupUi(this);
-    QSqlDatabase db = QSqlDatabase::database();
-
-    populateFields();
-    // Initialize Arduino for RFID reading
-
-
-    if(currentEmploye.getpost()=="client"){
-        ui->stackedWidget_2->setCurrentIndex(1);
-        QStackedWidget* stackedWidget = ui->stackedWidget_2;
-        QWidget* page = stackedWidget->widget(1);
+    int verif_arduino = A.connect_arduino();
+            switch(verif_arduino){
+            case(0):qDebug()<<"arduino is available and connected to :" << A.getArduinoPortName();
+                break;
+            case(1):qDebug()<<"arduino is available but not connected to :" << A.getArduinoPortName();
+                break;
+            case(-1):qDebug()<<"arduino is not available" ;
+                break;
+            }
+        QObject::connect(A.getSerial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+        QStackedWidget* stackedWidget = ui->stackedWidget;
+        QWidget* page = stackedWidget->widget(0);
         QTableView* tableView = page->findChild<QTableView*>("tableView");
 
-                if (tableView && db.isOpen()) {
-                    client client;
-                    tableView->setModel(client.Afficherclients());
-                    tableView->resizeColumnsToContents();
-                    tableView->horizontalHeader()->setStretchLastSection(true);}
+        if (tableView) {
+            client client;
+            Connection c;
 
-                connect(ui->gostat, &QPushButton::clicked, this, [this]() { navigateToPage(3); });
-                connect(ui->back, &QPushButton::clicked, this, [this]() { navigateToPage(1); });
-                connect(ui->backemp, &QPushButton::clicked, this, [this]() { navigateToPage(1); });
-               // connect(ui->goback, &QPushButton::clicked, this, [this]() { navigateToPage(1); });
+            if (c.createconnect()) {
+                QMessageBox::information(nullptr, QObject::tr("Database is open"),
+                                         QObject::tr("Connection successful.\nClick Cancel to exit."),
+                                         QMessageBox::Cancel);
 
-                // PDF connect
-                connect(ui->pdf, &QPushButton::clicked, this, &MainWindow::exportToPDF);
-                // Excel connect
-                connect(ui->excel, &QPushButton::clicked, this, &MainWindow::exportToExcel);
-                // Search connect
-                connect(ui->search_bar, &QLineEdit::textChanged, this, &MainWindow::Rechercherclient);
-                // Sort connect
-                connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(on_sortComboBox_currentIndexChanged(int)));
+                tableView->setModel(client.Afficherclients());
+                tableView->resizeColumnsToContents();
+                tableView->horizontalHeader()->setStretchLastSection(true);
 
 
-                QDate selectedDate = ui->calendarWidget->selectedDate();
-                updateCalendarAndEventDetails(selectedDate);
-    }
-    if(currentEmploye.getpost()=="employee"){
-        ui->stackedWidget_2->setCurrentIndex(0);
-    }
-}
-
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-    delete arduino;  // Clean up Arduino instance
-
-}
-void MainWindow::clearInputFields() {
-    ui->idEm->clear();
-    ui->nom->clear();
-    ui->prenom->clear();
-    ui->email->clear();
-    ui->mot_de_passe->clear();
-    ui->date_dembau->clear();
-    ui->salaire->clear();
-    ui->telephone->clear();
-    ui->post->clear();
-    ui->rfidLabel->clear();
-
-}
-void MainWindow::on_mody_Button_6_clicked() {
-    int idEm = ui->idEm->text().toInt();
-    QString nom = ui->nom->text();
-    QString prenom = ui->prenom->text();
-    QString email = ui->email->text();
-    QString mot_de_passe = ui->mot_de_passe->text();
-    QString date_dembau = ui->date_dembau->text();
-    int sal = ui->salaire->text().toInt();
-    QString  telephone = ui->telephone->text();
-    QString post = ui->post->text();
-    QString rfid = ui->rfidLabel->text();
-    // Validate fields
-    if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || mot_de_passe.isEmpty() ||
-        date_dembau.isEmpty() || sal <= 0 || telephone.isEmpty()|| post.isEmpty() || rfid.isEmpty()) {
-        QMessageBox::warning(this, tr("Input Error"), tr("All fields must be filled correctly."));
-        return;
-    }
-
-    // Create and add employee
-    Employe employe(idEm, nom, prenom, email, mot_de_passe, date_dembau, sal, telephone,post);
-    employe.setRfid(rfid);
-    if (employe.ajouter()) {
-        QMessageBox::information(this, tr("Success"), tr("Employee added successfully."));
-        ui->tableView5->setModel(employe.afficher());
-        clearInputFields();
-    } else {
-        qDebug() << "SQL Error: " << employe.getLastError();
-        QMessageBox::critical(this, tr("Failed"), tr("Failed to add employee."));
-    }
-}
-
-void MainWindow::readDataFromArduino()
-{
-    connect(arduino, &Arduino::tagScanned, this, [this](const QString &uid) {
-        rfid = uid;  // Store the scanned UID
-        ui->rfidLabel->setText(rfid);  // Update the UI label with the scanned UID
-        QMessageBox::information(this, "RFID Tag Scanned", "Tag UID: " + rfid);
-    });
-
-
-    if (!arduino->isAvailable()) {
-        QMessageBox::warning(this, "Arduino Error", "Arduino device not available. Ensure it is properly connected.");
-        return;
-    }
-
-    qDebug() << "Listening for RFID tags...";
-}
-
-
-void MainWindow::on_mody_Button_4_clicked()
-{
-    int idEm = ui->idEm->text().toInt();
-    QString nom = ui->nom->text();
-    QString prenom = ui->prenom->text();
-    QString email = ui->email->text();
-    QString mot_de_passe = ui->mot_de_passe->text();
-    QString date_dembau = ui->date_dembau->text();
-    int sal = ui->salaire->text().toInt();
-    QString telephone = ui->telephone->text();
-    QString post= ui->post->text();
-    QString rfid= ui->rfidLabel->text();
-
-    if (ui->idEm->text().isEmpty() || ui->nom->text().isEmpty() || ui->prenom->text().isEmpty() ||
-        ui->email->text().isEmpty() || ui->mot_de_passe->text().isEmpty() || ui->date_dembau->text().isEmpty() ||
-        ui->salaire->text().isEmpty() || ui->telephone->text().isEmpty() || ui->post->text().isEmpty() || ui->rfidLabel->text().isEmpty())
-    {
-        QMessageBox::warning(this, "Input Error", "All fields must be filled out.");
-        return;
-    }
-
-    Employe employe(idEm, nom, prenom, email, mot_de_passe, date_dembau, sal, telephone,post );
-    bool test = employe.modifier();
-
-    if (test) {
-        QMessageBox::information(this, "Update Successful", "Employee updated successfully.");
-        ui->tableView5->setModel(employe.afficher());
-        ui->idEm->clear();
-        ui->nom->clear();
-        ui->prenom->clear();
-        ui->email->clear();
-        ui->mot_de_passe->clear();
-        ui->date_dembau->clear();
-        ui->salaire->clear();
-        ui->telephone->clear();
-        ui->rfidLabel->clear();
-    } else {
-        QMessageBox::critical(this, "Update Failed", "Failed to update employee.");
-    }
-}
-void MainWindow::onTagScanned(const QString &uid)
-{
-    // Display the scanned UID in a QLabel or handle it as needed
-    ui->rfidLabel->setText(uid);  // Ensure rfidLabel exists in your UI
-    QMessageBox::information(this, "RFID Tag Scanned", "Tag UID: " + uid);
-}
-void MainWindow::on_mody_Button_7_clicked()
-{
-    int idEm = ui->idEm->text().toInt();
-
-    if (ui->idEm->text().isEmpty()) {
-        QMessageBox::warning(this, "Input Error", "Please enter the employee ID to delete.");
-        return;
-    }
-
-    Employe employe;
-    bool test = employe.supprimer(idEm);
-
-    if (test) {
-        QMessageBox::information(this, "Deletion Successful", "The employee has been deleted successfully.");
-        ui->tableView5->setModel(employe.afficher());
-        ui->idEm->clear();
-    } else {
-        QMessageBox::critical(this, "Deletion Failed", "Failed to delete the employee.");
-    }
-}
-
-void MainWindow::on_mody_Button_11_clicked()
-{
-    Employe employe;
-    ui->tableView5->setModel(employe.afficher());
-}
-
-void MainWindow::on_mody_Button_10_clicked()
-{
-        QString nom = ui->nom->text();
-        QString prenom = ui->prenom->text();
-
-        if (nom.isEmpty() || prenom.isEmpty()) {
-            QMessageBox::warning(this, "Erreur", "Veuillez remplir les champs Nom et Prénom.");
-            return;
-        }
-
-        ui->tableView5->setModel(e.rechercherParNomEtPrenom(nom, prenom));
-    }
-
-
-void MainWindow::on_mody_Button_9_clicked()
-{
-    Employe employe;
-        QSqlQueryModel *model = employe.trierParSalaire();
-
-        if (model) {
-            ui->tableView5->setModel(model);
-            ui->tableView5->show();
-            QMessageBox::information(this, "Tri", "La liste des employés a été triée par salaire.");
-        } else {
-            QMessageBox::critical(this, "Erreur", "Impossible de trier la liste des employés.");
-        }
-    }
-
-void MainWindow::on_mody_Button_8_clicked()
-{
-
-    if (ui->graphicsView->scene() != nullptr) {
-           ui->graphicsView->scene()->clear();
-       } else {
-           ui->graphicsView->setScene(new QGraphicsScene(this));
-       }
-
-       // Récupérer les statistiques des employés
-       QMap<QString, double> stats = e.getSalaryStatistics();
-
-       // Préparer les données pour le graphique
-       QBarSet *set = new QBarSet("Salaire");
-       *set << stats["total"] << stats["average"] << stats["min"] << stats["max"];
-
-       QBarSeries *series = new QBarSeries();
-       series->append(set);
-
-       // Configurer le graphique
-       QChart *chart = new QChart();
-       chart->addSeries(series);
-       chart->setTitle("Statistiques des Salaires");
-       chart->setAnimationOptions(QChart::SeriesAnimations);
-
-       // Configurer l'axe X
-       QStringList categories;
-       categories << "Total" << "Moyenne" << "Minimum" << "Maximum";
-
-       QBarCategoryAxis *axisX = new QBarCategoryAxis();
-       axisX->append(categories);
-       chart->addAxis(axisX, Qt::AlignBottom);
-       series->attachAxis(axisX);
-
-       // Configurer l'axe Y
-       QValueAxis *axisY = new QValueAxis();
-       axisY->setRange(0, stats["total"] * 1.1);
-       chart->addAxis(axisY, Qt::AlignLeft);
-       series->attachAxis(axisY);
-
-       // Afficher le graphique
-       QChartView *chartView = new QChartView(chart);
-       chartView->setRenderHint(QPainter::Antialiasing);
-       chartView->setMinimumSize(521, 401);
-
-       ui->graphicsView->scene()->addWidget(chartView);
-       chart->setMargins(QMargins(0, 0, 0, 0));
-       chart->legend()->setAlignment(Qt::AlignBottom);
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    QString filePath = QFileDialog::getSaveFileName(this, tr("Save PDF"), QDir::currentPath(), tr("PDF files (*.pdf)"));
-        if (filePath.isEmpty()) {
-            return;
-        }
-
-        QAbstractItemModel *model = ui->tableView5->model();
-        if (!model) {
-            QMessageBox::critical(this, tr("Error"), tr("No data to export!"));
-            return;
-        }
-
-        QPrinter printer;
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName(filePath);
-        printer.setPageOrientation(QPageLayout::Landscape);
-
-        QPainter painter;
-        if (!painter.begin(&printer)) {
-            QMessageBox::critical(this, tr("Error"), tr("Failed to open file for writing."));
-            return;
-        }
-
-        // Title
-        QFont titleFont("Arial", 16, QFont::Bold);
-        painter.setFont(titleFont);
-        painter.drawText(QRect(0, 0, printer.pageRect().width(), 100), Qt::AlignCenter, "Liste des Employés");
-
-        // Table headers
-        QFont headerFont("Arial", 10, QFont::Bold);
-        painter.setFont(headerFont);
-        int startX = 50, startY = 150, rowHeight = 30, colWidth = 150;
-
-        for (int col = 0; col < model->columnCount(); ++col) {
-            painter.drawText(startX + col * colWidth, startY, model->headerData(col, Qt::Horizontal).toString());
-        }
-
-        // Table data
-        QFont dataFont("Arial", 9);
-        painter.setFont(dataFont);
-        for (int row = 0; row < model->rowCount(); ++row) {
-            for (int col = 0; col < model->columnCount(); ++col) {
-                QString cellData = model->data(model->index(row, col)).toString();
-                painter.drawText(startX + col * colWidth, startY + (row + 1) * rowHeight, cellData);
+            } else {
+                QMessageBox::critical(nullptr, QObject::tr("Database is not open"),
+                                      QObject::tr("Connection failed.\nClick Cancel to exit."),
+                                      QMessageBox::Cancel);
             }
+        } else {
+            QMessageBox::critical(nullptr, QObject::tr("Error"),
+                                  QObject::tr("Failed to find the table view for Client data."),
+                                  QMessageBox::Cancel);
         }
 
-        painter.end();
+        connect(ui->gostat, &QPushButton::clicked, this, [this]() { navigateToPage(1); });
+        connect(ui->back, &QPushButton::clicked, this, [this]() { navigateToPage(0); });
 
-        QMessageBox::information(this, tr("Export Successful"), tr("PDF has been saved successfully."));
-}
+        // PDF connect
+        connect(ui->pdf, &QPushButton::clicked, this, &mainwindowcl::exportToPDF);
+        // Excel connect
+        connect(ui->excel, &QPushButton::clicked, this, &mainwindowcl::exportToExcel);
+        // Search connect
+        connect(ui->search_bar, &QLineEdit::textChanged, this, &mainwindowcl::Rechercherclient);
+        // Sort connect
+        connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(on_sortComboBox_currentIndexChanged(int)));
 
 
-void MainWindow::populateFields()
-{
-    ui->idEm->setText(QString::number(currentEmploye.getIdEm()));
-    ui->nom->setText(currentEmploye.getNom());
-    ui->prenom->setText(currentEmploye.getPrenom());
-    ui->email->setText(currentEmploye.getEmail());
-    ui->mot_de_passe->setText(currentEmploye.getMotDePasse());
-    ui->date_dembau->setText(currentEmploye.getDateDembau());
-    ui->salaire->setText(QString::number(currentEmploye.getSalaire()));
-    ui->telephone->setText(currentEmploye.getTelephone());
-    ui->post->setText(currentEmploye.getpost());
-    ui->rfidLabel->setText(currentEmploye.getpost());
-}
+        QDate selectedDate = ui->calendarWidget->selectedDate();
+        updateCalendarAndEventDetails(selectedDate);*/
+    }
 
-void MainWindow::on_mody_Button_12_clicked()
-{
-    ui->idEm->clear();
-    ui->nom->clear();
-    ui->prenom->clear();
-    ui->email->clear();
-    ui->mot_de_passe->clear();
-    ui->date_dembau->clear();
-    ui->telephone->clear();
-    ui->salaire->clear();
-    ui->post->clear();
-    ui->rfidLabel->clear();
+    mainwindowcl::~mainwindowcl() {
+        delete ui;
+    }
+    void mainwindowcl::on_confirm_clicked() {
+        QString rfidValue = ui->rfid->text(); // Get text from QLineEdit
 
-}
-void MainWindow::on_ajouter_clicked()
+        if (rfidValue.isEmpty()) {
+            QMessageBox::warning(this, "Input Error", "Please enter an RFID value.");
+            return;
+        }
+
+        QSqlQuery query;
+        query.prepare("SELECT NOM, PRENOM FROM employe WHERE RFID = :rfid");
+        query.bindValue(":rfid", rfidValue);
+
+        if (query.exec()) {
+            if (query.next()) { // If an entry is found
+                QString nom = query.value("NOM").toString();
+                QString prenom = query.value("PRENOM").toString();
+                sendDataToArduino(nom, prenom); // Send data to Arduino
+                QMessageBox::information(this, "Success", "Employee found: " + nom + " " + prenom);
+            } else {
+                sendDataToArduinonotfound(); // Send "notfound" to Arduino
+                QMessageBox::warning(this, "Not Found", "RFID not found in the employees table.");
+            }
+        } else {
+            QMessageBox::critical(this, "Database Error", "Failed to query the database: " + query.lastError().text());
+        }
+    }
+
+
+
+    void mainwindowcl::sendDataToArduino(const QString &nom, const QString &prenom) {// Ensure the serial connection is open and writable
+            QString dataToSend = nom + "," + prenom + "\n"; // Format: "id,name"
+            A.write_arduino(dataToSend.toUtf8()); // Send data to Arduino
+
+    }
+    void mainwindowcl::sendDataToArduinonotfound() {// Ensure the serial connection is open and writable
+            QString dataToSend = "notfound\n"; // Format: "id,name"
+            A.write_arduino(dataToSend.toUtf8()); // Send data to Arduino
+
+    }
+    void mainwindowcl::on_ajouter_clicked()
     {
         QString nom = ui->nom->text();
         QString prenom = ui->prnom->text();
@@ -412,11 +141,13 @@ void MainWindow::on_ajouter_clicked()
 
 
         // Input validation
-
+        QRegExp nameRx("^[a-zA-Z]+$"); // Only letters
         QRegExp telRx("^\\d{8}$"); // Exactly 8 digits
         QRegExp emailRx("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"); // Email format
 
-        if (!telRx.exactMatch(tel)) {
+        if (!nameRx.exactMatch(nom) || !nameRx.exactMatch(prenom)) {
+            QMessageBox::critical(this, tr("Erreur"), tr("Le nom et le prénom doivent contenir uniquement des lettres."), QMessageBox::Cancel);
+        } else if (!telRx.exactMatch(tel)) {
             QMessageBox::critical(this, tr("Erreur"), tr("Le téléphone doit comporter exactement 8 chiffres."), QMessageBox::Cancel);
         } else if (!emailRx.exactMatch(email)) {
             QMessageBox::critical(this, tr("Erreur"), tr("L'email doit être au format valide."), QMessageBox::Cancel);
@@ -450,7 +181,7 @@ void MainWindow::on_ajouter_clicked()
 
 
 
-    void MainWindow::on_tableView_activated(const QModelIndex &index)
+    void mainwindowcl::on_tableView_activated(const QModelIndex &index)
     {
         if (!index.isValid()) {
             qDebug() << "Invalid index";
@@ -491,7 +222,7 @@ void MainWindow::on_ajouter_clicked()
     }
 
 
-    void MainWindow::on_modifier_clicked()
+    void mainwindowcl::on_modifier_clicked()
     {
         QModelIndexList selectedIndexes = ui->tableView->selectionModel()->selectedIndexes();
 
@@ -544,7 +275,7 @@ void MainWindow::on_ajouter_clicked()
         updateCalendarAndEventDetails(selectedDate);
     }
 
-    void MainWindow::on_supprimer_clicked()
+    void mainwindowcl::on_supprimer_clicked()
     {
         int id_cl = ui->id->text().toInt();
 
@@ -583,9 +314,9 @@ void MainWindow::on_ajouter_clicked()
         QString prenom = query.value(1).toString();
         cli.setNom(nom);
         cli.setPrenom(prenom);
-        QString string = QString::number(id_cl);
+
         // Attempt deletion
-        bool success = cli.Supprimerclient(string);
+        bool success = cli.Supprimerclient(ID_CL);
 
 
         // Prepare history details
@@ -625,7 +356,7 @@ void MainWindow::on_ajouter_clicked()
     }
 
 
-    void MainWindow::exportToPDF()
+    void mainwindowcl::exportToPDF()
     {
         QString filePath = QFileDialog::getSaveFileName(this, tr("Save PDF"), QDir::currentPath(), tr("PDF files (*.pdf)"));
         if (filePath.isEmpty()) {
@@ -704,7 +435,7 @@ void MainWindow::on_ajouter_clicked()
         }
     }
 
-    void MainWindow::exportToExcel()
+    void mainwindowcl::exportToExcel()
     {
         QString fileName = QFileDialog::getSaveFileName(this, "Export Excel", "", "*.xlsx");
         if (!fileName.isEmpty()) {
@@ -774,7 +505,7 @@ void MainWindow::on_ajouter_clicked()
         }
     }
 
-    void MainWindow::Rechercherclient(const QString &text)
+    void mainwindowcl::Rechercherclient(const QString &text)
     {
         client c;
         QSqlQueryModel *model = c.Rechercherclient(text);
@@ -782,7 +513,7 @@ void MainWindow::on_ajouter_clicked()
     }
 
 
-    void MainWindow::displayCharts_clientByGender()
+    void mainwindowcl::displayCharts_clientByGender()
     {
         QtCharts::QChart *chart = new QtCharts::QChart();
         chart->setBackgroundBrush(QBrush(Qt::white));
@@ -813,7 +544,7 @@ void MainWindow::on_ajouter_clicked()
     }
     QSqlQueryModel *clientModel;
 
-    void MainWindow::on_sortComboBox_currentIndexChanged(int index)
+    void mainwindowcl::on_sortComboBox_currentIndexChanged(int index)
     {
         clientModel = new QSqlQueryModel(); // Create a new model each time
 
@@ -852,7 +583,7 @@ void MainWindow::on_ajouter_clicked()
     }
 
 
-    void MainWindow::on_gostat_clicked()
+    void mainwindowcl::on_gostat_clicked()
     {
         displayCharts_clientByGender();
         ui->stackedWidget->setCurrentIndex(1);
@@ -861,25 +592,25 @@ void MainWindow::on_ajouter_clicked()
 
 
 
-    void MainWindow::navigateToPage(int pageIndex)
+    void mainwindowcl::navigateToPage(int pageIndex)
     {
-        ui->stackedWidget_2->setCurrentIndex(pageIndex);
+        ui->stackedWidget->setCurrentIndex(pageIndex);
     }
 
-    void MainWindow::on_gocalendar_clicked()
+    void mainwindowcl::on_gocalendar_clicked()
     {
         QDate selectedDate = ui->calendarWidget->selectedDate();
         updateCalendarAndEventDetails(selectedDate);
 
-        ui->stackedWidget_2->setCurrentIndex(2);
+        ui->stackedWidget->setCurrentIndex(2);
     }
 
-    void MainWindow::on_back_fromcalendr_4_clicked()
+    void mainwindowcl::on_back_fromcalendr_clicked()
     {
-        ui->stackedWidget->setCurrentIndex(1);
+        ui->stackedWidget->setCurrentIndex(0);
     }
 
-    void MainWindow::on_calendarWidget_clicked(const QDate &date)
+    void mainwindowcl::on_calendarWidget_clicked(const QDate &date)
     {
         // Create a QSqlQuery to fetch the idClient for the clicked date from the database
         QSqlQuery idQuery;
@@ -969,7 +700,7 @@ void MainWindow::on_ajouter_clicked()
     }
 
 
-    void MainWindow::updateCalendarAndEventDetails(const QDate &date) {
+    void mainwindowcl::updateCalendarAndEventDetails(const QDate &date) {
         // Clear existing date text formats in the calendar
         ui->calendarWidget->setDateTextFormat(QDate(), QTextCharFormat());
 
@@ -1068,5 +799,6 @@ void MainWindow::on_ajouter_clicked()
             ui->D_CONSERVATION_client_label_cal->setVisible(false);
         }
     }
+
 
 

@@ -47,16 +47,16 @@ public:
     void setDateDembau(const QString &date_dembau);
     void setSalaire(int sal);
     void setTelephone(const QString &telephone);
-    void setpost(int post);
+    void setpost(QString post);
     void setRfid(const QString &rfidValue) { rfid = rfidValue; }
     QString getRfid() const { return rfid; }
-
+    bool recupererEmployeByRFID(const QString &rfid, Employe &employee);
     bool ajouter();
     bool supprimer(int idEm);
     bool modifier();
     QSqlQueryModel* afficher();
     QSqlQueryModel* rechercherParNomEtPrenom(const QString &nom, const QString &prenom);
-     static bool recupererEmploye(const QString &email, const QString &password, Employe &employee);
+    static bool recupererEmploye(const QString &email, const QString &password, Employe &employee);
 
     QString getLastError() const;
     void setLastError(const QString &error);
