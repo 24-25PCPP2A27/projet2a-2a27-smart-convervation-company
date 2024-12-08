@@ -1,0 +1,1889 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainwindowpr</class>
+ <widget class="QMainWindow" name="mainwindowpr">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1467</width>
+    <height>927</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gestion des Clients</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QFrame" name="verticalFrame_2">
+    <property name="geometry">
+     <rect>
+      <x>4</x>
+      <y>20</y>
+      <width>281</width>
+      <height>831</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>300</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QFrame{
+	
+border-top-left-radius: 20px;
+border-bottom-left-radius: 20px;
+}
+
+QPushButton:enabled{
+
+
+height: 24px;
+
+	
+	background-color: rgb(153, 153, 230);
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+QPushButton:disabled{
+
+
+height: 24px;
+
+background: transparent;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #A9A9A9	;
+
+
+}
+
+
+
+</string>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_8">
+     <item>
+      <widget class="QFrame" name="verticalFrame_3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(105, 156, 77);
+border-color: rgb(0, 85, 0);</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_13">
+        <property name="spacing">
+         <number>16</number>
+        </property>
+        <property name="topMargin">
+         <number>28</number>
+        </property>
+        <item>
+         <widget class="QWidget" name="horizontalWidget_25" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>49</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <item>
+            <widget class="QPushButton" name="pushButton_7">
+             <property name="styleSheet">
+              <string notr="true">
+width: 140px;
+height: 25px;
+
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 25px;
+</string>
+             </property>
+             <property name="text">
+              <string>Dashboard</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="horizontalWidget_26" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>49</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+width: 140px;
+height: 25px;
+
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 25px;
+/* identical to box height */
+
+color: #FFFFFF;
+
+
+</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_13">
+           <item>
+            <widget class="QPushButton" name="EmploiesRoomsOpen_4">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Employés</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="horizontalWidget_27" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>49</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+width: 140px;
+height: 25px;
+
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 25px;
+/* identical to box height */
+
+color: #FFFFFF;
+
+
+</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_49">
+           <item>
+            <widget class="QPushButton" name="ClientsRoomsOpen_4">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Clients</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="horizontalWidget_28" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>49</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+width: 140px;
+height: 25px;
+
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 25px;
+/* identical to box height */
+
+color: #FFFFFF;
+
+
+</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_50">
+           <item>
+            <widget class="QPushButton" name="VehiculeRoomsOpen_4">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Produits</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="horizontalWidget_29" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>49</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+width: 140px;
+height: 25px;
+
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 25px;
+/* identical to box height */
+
+color: #FFFFFF;
+
+
+</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_51">
+           <item>
+            <widget class="QLabel" name="label_90">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>24</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>24</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-image: url(:/public/icons/public/icons/users.png);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="PartenairesRoomsOpen_4">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Equipements</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="horizontalWidget_30" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>49</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+width: 140px;
+height: 25px;
+
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 25px;
+/* identical to box height */
+
+color: #FFFFFF;
+
+
+</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_52">
+           <item>
+            <widget class="QLabel" name="label_91">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>24</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>24</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-image: url(:/public/icons/public/icons/users.png);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="CommandeRoomsOpen_4">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Traitements</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_4">
+          <property name="styleSheet">
+           <string notr="true">
+
+position: absolute;
+width: 218px;
+height: 0px;
+left: 116px;
+top: 535px;
+
+border: 1px solid #C4C4C4;
+</string>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="horizontalWidget_31" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>49</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_14">
+           <item>
+            <widget class="QPushButton" name="pushButton_8">
+             <property name="styleSheet">
+              <string notr="true">
+width: 140px;
+height: 25px;
+
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 25px;
+</string>
+             </property>
+             <property name="text">
+              <string>Déconnecter</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="horizontalWidget_32" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>49</height>
+           </size>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLineEdit" name="LineEdit_AIChat_4">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>43</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;
+color:black;</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="main_menu" native="true">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>20</y>
+      <width>1141</width>
+      <height>851</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>13</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#info_frame QLabel,
+#info_frame QLineEdit,
+#info_frame QComboBox,
+#function_frame QPushButton,
+QHeaderView::section {
+    font-family: 'Segoe UI Semibold';
+    font-size: 12px;
+}
+
+/* Styles for input fields and combo boxes inside info_frame */
+#info_frame QLineEdit,
+#info_frame QComboBox {
+    padding: 4px 5px;
+    border: 1px solid #838383;
+    border-radius: 2px;
+}
+
+/* Focus styles for input fields and combo boxes */
+#info_frame QLineEdit:focus,
+#info_frame QComboBox:focus {
+    border-color: #0055ff;
+}
+
+
+QComboBox::drop-down{
+background:transparent;
+border:none;
+margin-right:5px;
+}
+
+
+#result_frame{
+border-radius:5px;
+background-color:#fff;
+}
+
+QTableWidget{
+border-radius:3px;
+border: 1px solid #f0f0f0;
+}
+
+
+QHeaderView::section{
+border:none;
+border-bottom: 1px solid #d0c6ff;
+text-align:left;
+padding: 3px 5px;
+
+}
+
+QTableWidget::item{
+border-bottom:1px solid #d0c6ff;
+color:#000;
+padding-left:3px;
+}
+
+
+#function_frame QPushButton {
+    font-size: 14px;
+    padding: 5px 10px;
+    border: 2px solid #f0f0f0;
+    border-radius: 5px;
+    background-color: #84a8f7;
+}
+
+
+/*#function_frame#delete_btn{
+background-color:#ff8183;
+}*/
+
+#function_frame QPushButton:hover{
+border-color:#4c96f7;
+font-size:15px;
+}
+
+#function_frame#delete_btn:hover {
+border-color:#dc004;
+}
+
+
+
+#delete_btn {
+    background-color: #ff0000; /* Default background color */
+    color: white; /* Text color */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Padding for the button */
+}
+
+#delete_btn:hover {
+    background-color: #dc0003; /* Change background on hover */
+}
+
+
+
+</string>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_7">
+     <item>
+      <widget class="QStackedWidget" name="stackedWidget_3">
+       <property name="font">
+        <font>
+         <family>Segoe UI Black</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="messages_page_3">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <widget class="QWidget" name="widget_11" native="true">
+         <property name="geometry">
+          <rect>
+           <x>-30</x>
+           <y>20</y>
+           <width>1081</width>
+           <height>821</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget#widget_8{
+
+    position: absolute;
+    width: 3389.75px;
+    height: 2997.84px;
+    left: 2152.95px;
+    top: 895.79px;
+   
+	background-color: rgba(114, 192, 78, 50);
+    border: 5px solid;
+	border-color: rgba(114, 192, 78, 70);
+
+    border-radius: 30.5383px;
+}</string>
+         </property>
+         <widget class="QLineEdit" name="nom">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>90</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>NOM</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="idCl_3">
+          <property name="geometry">
+           <rect>
+            <x>830</x>
+            <y>580</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>IDCl</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="quantite">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>90</y>
+            <width>131</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>Quantité</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="statut">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>160</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>Statut</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="description">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>160</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>Description</string>
+          </property>
+         </widget>
+         <widget class="QTableView" name="tableView5">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>390</y>
+            <width>931</width>
+            <height>271</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="search_bar_3">
+          <property name="geometry">
+           <rect>
+            <x>270</x>
+            <y>700</y>
+            <width>151</width>
+            <height>41</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="id">
+          <property name="geometry">
+           <rect>
+            <x>990</x>
+            <y>340</y>
+            <width>61</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QDateEdit" name="dateReception">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>230</y>
+            <width>131</width>
+            <height>31</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QDateEdit" name="dateConservation">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>230</y>
+            <width>131</width>
+            <height>31</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="DATE_RECEPTION_3">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>200</y>
+            <width>141</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Date de réception</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="DATE_CONSERVATION_3">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>200</y>
+            <width>151</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Date de conservation</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_12">
+          <property name="geometry">
+           <rect>
+            <x>330</x>
+            <y>10</y>
+            <width>251</width>
+            <height>61</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>22</pointsize>
+            <weight>50</weight>
+            <italic>true</italic>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 115, 0);</string>
+          </property>
+          <property name="text">
+           <string>    Produits</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_35">
+          <property name="geometry">
+           <rect>
+            <x>850</x>
+            <y>350</y>
+            <width>131</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 115, 0);</string>
+          </property>
+          <property name="text">
+           <string>ID Product Selected :</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="Exporter_Button_11">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>540</y>
+            <width>81</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>PDF</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../Desktop/chaima88/chaima08/chaimaf/crud yassine/Atelier_Connexion/im/picture_as_pdf_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>../Desktop/chaima88/chaima08/chaimaf/crud yassine/Atelier_Connexion/im/picture_as_pdf_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="excel">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>610</y>
+            <width>81</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>EXCEL</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../Desktop/chaima88/chaima08/chaimaf/crud yassine/Atelier_Connexion/im/picture_as_pdf_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>../Desktop/chaima88/chaima08/chaimaf/crud yassine/Atelier_Connexion/im/picture_as_pdf_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="mody_Button_6">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>320</y>
+            <width>121</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>AJOUTER</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="modi_Button_3">
+          <property name="geometry">
+           <rect>
+            <x>380</x>
+            <y>320</y>
+            <width>131</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>MODIFIER</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="mody_Button_10">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>690</y>
+            <width>131</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>RECHERCHE</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="Trier_Button_9">
+          <property name="geometry">
+           <rect>
+            <x>500</x>
+            <y>690</y>
+            <width>131</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>TRI</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="Stat_Button_8">
+          <property name="geometry">
+           <rect>
+            <x>880</x>
+            <y>20</y>
+            <width>151</width>
+            <height>54</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>STATISTIQUES</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="supp_button">
+          <property name="geometry">
+           <rect>
+            <x>620</x>
+            <y>320</y>
+            <width>131</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>SUPPRIMER</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label">
+          <property name="geometry">
+           <rect>
+            <x>760</x>
+            <y>100</y>
+            <width>291</width>
+            <height>161</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="stat_gender_4">
+          <property name="geometry">
+           <rect>
+            <x>810</x>
+            <y>130</y>
+            <width>201</width>
+            <height>101</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="page_3">
+        <widget class="QLabel" name="stat_gender_3">
+         <property name="geometry">
+          <rect>
+           <x>540</x>
+           <y>360</y>
+           <width>191</width>
+           <height>141</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="back_3">
+         <property name="geometry">
+          <rect>
+           <x>510</x>
+           <y>600</y>
+           <width>141</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #6200ea;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+QPushButton:hover {
+    background-color: #3700b3;
+}
+QPushButton:pressed {
+    background-color: #30009c;
+}</string>
+         </property>
+         <property name="text">
+          <string>Go Back</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="Calendar_page_3">
+        <widget class="QPushButton" name="back_fromcalendr_3">
+         <property name="geometry">
+          <rect>
+           <x>470</x>
+           <y>660</y>
+           <width>141</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #6200ea;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+QPushButton:hover {
+    background-color: #3700b3;
+}
+QPushButton:pressed {
+    background-color: #30009c;
+}</string>
+         </property>
+         <property name="text">
+          <string>Go Back</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1467</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
