@@ -40,7 +40,8 @@
 #include <QVBoxLayout>
 #include "arduino.h"
 #include "employe.h"
-
+#include"traitementproduit.h"
+#include"qrcode.h"
 
 using namespace QtCharts;
 
@@ -98,6 +99,11 @@ MainWindow::MainWindow(const Employe &employe,QWidget *parent) :
         QStackedWidget* stackedWidget = ui->stackedWidget_2;
         QWidget* page = stackedWidget->widget(4);
     }
+    else if(currentEmploye.getpost()=="traitement"){
+
+         QStackedWidget* stackedWidget = ui->stackedWidget_2;
+         QWidget* page = stackedWidget->widget(5);
+     }
 }
 
 
@@ -1350,4 +1356,229 @@ void MainWindow::on_inserer_2_clicked()
         ui->lien_image_2->setText(imagePath);
         ui->lien_image_2->hide();
     }
+}
+
+
+
+//traitementdeproduit
+void MainWindow::on_back_fromcalendr_clicked()
+{
+    ui->stackedWidget_2->setCurrentIndex(5);
+}
+
+void MainWindow::on_back_fromcalendr_2_clicked()
+{
+     ui->stackedWidget_2->setCurrentIndex(5);
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    int id = ui->id_2->text().toInt();
+    float prix = ui->prix->text().toFloat();
+    QString type = ui->type->currentText();
+    int duree = ui->duree->text().toInt();
+    int tmpMin = ui->tmpMin->text().toInt();
+    int tmpMax = ui->tmpMax->text().toInt();
+
+
+    if (ui->id_2->text().isEmpty() || type.isEmpty() || ui->duree->text().isEmpty() ||
+        ui->tmpMax->text().isEmpty() || ui->tmpMin->text().isEmpty() || ui->prix->text().isEmpty()) {
+        QMessageBox::warning(this, "Input Error", "All fields must be filled out.");
+        return;
+    }
+
+    if (id <= 0) {
+        QMessageBox::warning(this, "Input Error", "ID must be a positive number.");
+        return;
+    }
+
+    if (prix <= 0) {
+        QMessageBox::warning(this, "Input Error", "prix must be a positive number.");
+        return;
+    }
+
+    traitementproduit T(id, type, duree, tmpMax, tmpMin, prix);
+
+    bool test = T.ajouter();
+    QMessageBox msgBox;
+    if (test) {
+        msgBox.setText("Ajout avec succès");
+        ui->tab_5->setModel(T.afficher());
+    //    ui->tab_6->setModel(T.afficher());
+        ui->id_2->clear();
+        ui->duree->clear();
+        ui->tmpMax->clear();
+        ui->tmpMin->clear();
+        ui->prix->clear();
+    } else {
+        ui->tab_5->setModel(T.afficher());
+        //ui->tab_6->setModel(T.afficher());
+        msgBox.setText("Echec d'ajout");
+    }
+    msgBox.exec();
+
+}
+
+void MainWindow::on_afficher_clicked()
+{
+    ui->tab_5->setModel(T.afficher());
+}
+
+
+void MainWindow::on_gostat_2_clicked()
+{
+    QLayoutItem* item;
+    while ((item = ui->stats_3->layout()->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+    QChartView *chartView = nullptr;
+
+ui->stackedWidget_2->setCurrentIndex(6);
+        chartView = T.type1();
+
+        if (chartView != nullptr) {
+            ui->stats_3->layout()->addWidget(chartView);
+        }
+}
+
+void MainWindow::on_modifier_2_clicked()
+{
+    // Récupérer les données depuis les QLineEdit et QComboBox
+    int id = ui->id_2->text().toInt();
+    QString type = ui->type->currentText();  // Utilise le QComboBox 'type'
+    int duree = ui->duree->text().toInt();
+    int tmpMax = ui->tmpMax->text().toInt();
+    int tmpMin = ui->tmpMin->text().toInt();
+    float prix = ui->prix->text().toFloat();
+
+    // Vérifier que tous les champs sont remplis
+    if (ui->id_2->text().isEmpty() || type.isEmpty() || ui->duree->text().isEmpty() ||
+        ui->tmpMax->text().isEmpty() || ui->tmpMin->text().isEmpty() || ui->prix->text().isEmpty()) {
+        QMessageBox::warning(this, "Erreur de saisie", "Tous les champs doivent être remplis.");
+        return;
+    }
+
+    // Vérifier que l'ID est valide
+    if (id <= 0) {
+        QMessageBox::warning(this, "Erreur de saisie", "L'ID doit être un nombre positif.");
+        return;
+    }
+
+    // Vérifier que le prix est valide
+    if (prix <= 0) {
+        QMessageBox::warning(this, "Erreur de saisie", "Le prix doit être un nombre positif.");
+        return;
+    }
+
+    // Appeler la méthode de modification
+    bool test = T.modifier(id, type, duree, tmpMax, tmpMin, prix);
+    QMessageBox msgBox;
+
+    if (test) {
+        msgBox.setText("Modification réussie.");
+        ui->tab_5->setModel(T.afficher());
+        //ui->tab_6->setModel(T.afficher());
+
+        // Nettoyer les champs après la modification
+        ui->id_2->clear();
+        ui->duree->clear();
+        ui->tmpMax->clear();
+        ui->tmpMin->clear();
+        ui->prix->clear();
+    } else {
+        msgBox.setText("Échec de la modification.");
+    }
+
+    msgBox.exec();
+}
+
+void MainWindow::on_suprimer_clicked()
+{
+    int id = ui->id_supp->text().toInt();
+    bool test = T.supprimer(id);
+    QMessageBox msgBox;
+    if (test) {
+        msgBox.setText("Supprimé avec succès");
+        ui->tab_5->setModel(T.afficher());
+       // ui->tab_6->setModel(T.afficher());
+    } else {
+        msgBox.setText("Echec de suppression");
+    }
+    msgBox.exec();
+}
+
+void MainWindow::on_trier_clicked()
+{
+    if (ui->tri_duree->isChecked()) {
+        ui->tab_5->setModel(T.tri_duree());
+    }
+}
+
+void MainWindow::on_rech_id_textChanged(const QString &arg1)
+{
+    int id = arg1.toInt();
+    ui->tab_5->setModel(T.rechercher(id));
+    ui->tab_5->clearSelection();
+}
+
+
+void MainWindow::on_pdf_2_clicked()
+{
+    T.exportDataToPDF();
+
+}
+
+
+void MainWindow::on_pdf_3_clicked()
+{
+    ui->stackedWidget_2->setCurrentIndex(8);
+}
+
+void MainWindow::on_pdf_4_clicked()
+{
+    ui->stackedWidget_2->setCurrentIndex(7);
+}
+
+
+void MainWindow::on_back_fromcalendr_3_clicked()
+{
+   ui->stackedWidget_2->setCurrentIndex(5);
+}
+
+void MainWindow::on_qrCode_clicked()
+{
+    using namespace qrcodegen;
+
+    QString value = ui->qr_code_bar->text();
+
+    if (value.isEmpty()) {
+        QMessageBox::warning(this, "Error", "QR Code cannot be empty!");
+    } else {
+        QString text = "Traitement produit with ID: " + value + " is validated.";
+        QrCode qr = QrCode::encodeText(text.toUtf8().data(), QrCode::Ecc::MEDIUM);
+
+        qint32 sz = qr.getSize();
+        QImage im(sz, sz, QImage::Format_RGB32);
+        QRgb black = qRgb(9, 13, 12);
+        QRgb white = qRgb(255, 255, 255);
+
+        for (int y = 0; y < sz; y++) {
+            for (int x = 0; x < sz; x++) {
+                im.setPixel(x, y, qr.getModule(x, y) ? black : white);
+            }
+        }
+
+        ui->qrcodecommande_2->setPixmap(QPixmap::fromImage(im.scaled(200, 200, Qt::KeepAspectRatio, Qt::FastTransformation), Qt::MonoOnly));
+    }
+}
+
+void MainWindow::on_CommandeRoomsOpen_2_clicked()
+{
+    ui->stackedWidget_2->setCurrentIndex(5);
+}
+
+void MainWindow::on_ClientsRoomsOpen_2_clicked()
+{
+     ui->stackedWidget_2->setCurrentIndex(1);
 }

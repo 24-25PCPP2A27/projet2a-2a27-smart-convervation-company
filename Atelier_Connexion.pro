@@ -47,7 +47,9 @@ SOURCES += \
         mainwindow.cpp \
     connection.cpp \
     mdpoublie.cpp \
-    smtp.cpp
+    qrcode.cpp \
+    smtp.cpp \
+    traitementproduit.cpp
 
 HEADERS += \
     arduino.h \
@@ -60,7 +62,9 @@ HEADERS += \
         mainwindow.h \
     connection.h \
     mdpoublie.h \
-    smtp.h
+    qrcode.h \
+    smtp.h \
+    traitementproduit.h
 
 FORMS += \
         bienvenue.ui \

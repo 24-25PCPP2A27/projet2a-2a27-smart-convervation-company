@@ -5,6 +5,7 @@
 #include "arduino.h"
 #include "equipement.h"
 #include "ardunioeq.h"
+#include"traitementproduit.h"
 namespace Ui {
 class MainWindow;
 }
@@ -86,6 +87,37 @@ private slots:
 
     void on_inserer_2_clicked();
 void arduinoEq() ;
+void on_back_fromcalendr_3_clicked();
+
+void on_back_fromcalendr_clicked();
+
+void on_back_fromcalendr_2_clicked();
+
+void on_pushButton_2_clicked();
+
+void on_afficher_clicked();
+
+void on_gostat_2_clicked();
+
+void on_modifier_2_clicked();
+
+void on_suprimer_clicked();
+
+void on_trier_clicked();
+ void on_rech_id_textChanged(const QString &arg1);
+
+ void on_pdf_2_clicked();
+
+ void on_pdf_3_clicked();
+
+ void on_pdf_4_clicked();
+
+ void on_qrCode_clicked();
+
+ void on_CommandeRoomsOpen_2_clicked();
+
+ void on_ClientsRoomsOpen_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     Employe e;
@@ -96,6 +128,8 @@ private:
     void readDataFromArduino();
      ardunioEq A;
     Equipement Etemp;  // Instance of Equipement to interact with the DB
+    //traitement
+    traitementproduit T;
 };
 
 #endif // MAINWINDOW_H

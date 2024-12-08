@@ -10,7 +10,9 @@ INPUT(
 ./debug\mainwindow.o
 ./debug\connection.o
 ./debug\mdpoublie.o
+./debug\qrcode.o
 ./debug\smtp.o
+./debug\traitementproduit.o
 ./debug\qrc_images.o
 ./debug\moc_arduino.o
 ./debug\moc_bienvenue.o

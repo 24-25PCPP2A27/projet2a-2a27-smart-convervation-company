@@ -10,7 +10,9 @@ INPUT(
 ./release\mainwindow.o
 ./release\connection.o
 ./release\mdpoublie.o
+./release\qrcode.o
 ./release\smtp.o
+./release\traitementproduit.o
 ./release\qrc_images.o
 ./release\moc_arduino.o
 ./release\moc_bienvenue.o

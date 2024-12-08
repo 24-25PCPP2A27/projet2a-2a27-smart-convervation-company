@@ -327,11 +327,28 @@ void bienvenue::on_pushButton_clicked()
 
         this->close();
 
-    } else {
+    }
+    else if (post == "traitement") {
+
+            // Open the client-spec ific window
+            QString dataToSend = email + "," + password + "\n"; // Format: "id,name"
+            arduino->write_arduino(dataToSend.toUtf8());
+            QMessageBox::information(this, "Login Successful", "traitement!");
+
+            MainWindow *mainWindow = new MainWindow(employee);  // Pass employee to MainWindow
+
+            mainWindow->setAttribute(Qt::WA_DeleteOnClose);
+
+            mainWindow->show();
+
+            this->close();
+
+        }else {
            arduino->write_arduino("notfound");
         QMessageBox::warning(this, "Login Failed", "Invalid email, password, or post. Please try again.");
 
-    }}
+    }
+}
 
 
 

@@ -520,63 +520,6 @@ color: #72C04E;
          </widget>
         </item>
         <item>
-         <widget class="QWidget" name="horizontalWidget_13" native="true">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>49</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">
-width: 140px;
-height: 25px;
-
-font-family: 'Manrope';
-font-style: normal;
-font-weight: 700;
-font-size: 18px;
-line-height: 25px;
-/* identical to box height */
-
-color: #FFFFFF;
-
-
-</string>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_44">
-           <item>
-            <widget class="QLabel" name="label_86">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>24</width>
-               <height>24</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-image: url(:/public/icons/public/icons/users.png);</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
          <widget class="QWidget" name="horizontalWidget_14" native="true">
           <property name="maximumSize">
            <size>
@@ -856,7 +799,7 @@ border-color:#dc004;
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>4</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="messages_page">
         <property name="font">
@@ -4033,7 +3976,7 @@ QPushButton:pressed {
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="page_9">
           <widget class="QPushButton" name="pb1_2">
@@ -5411,6 +5354,1541 @@ QPushButton:pressed {
          </widget>
         </widget>
        </widget>
+       <widget class="QWidget" name="page_7">
+        <widget class="QWidget" name="widget_10" native="true">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>0</y>
+           <width>1131</width>
+           <height>821</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget#widget_8{
+
+    position: absolute;
+    width: 3389.75px;
+    height: 2997.84px;
+    left: 2152.95px;
+    top: 895.79px;
+   
+	background-color: rgba(114, 192, 78, 50);
+    border: 5px solid;
+	border-color: rgba(114, 192, 78, 70);
+
+    border-radius: 30.5383px;
+}</string>
+         </property>
+         <widget class="QLineEdit" name="id_2">
+          <property name="geometry">
+           <rect>
+            <x>510</x>
+            <y>60</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>idtraitement</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="idCl">
+          <property name="geometry">
+           <rect>
+            <x>830</x>
+            <y>580</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>IDCl</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="tmpMax">
+          <property name="geometry">
+           <rect>
+            <x>680</x>
+            <y>160</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>temperature_max</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="duree">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>160</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>dureetraitement</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="tmpMin">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>220</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>temperature_min</string>
+          </property>
+         </widget>
+         <widget class="QTableView" name="tab_5">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>390</y>
+            <width>931</width>
+            <height>271</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="prix">
+          <property name="geometry">
+           <rect>
+            <x>670</x>
+            <y>230</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #ddd; /* Light border */
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>Prix</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_7">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>-10</y>
+            <width>351</width>
+            <height>61</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>22</pointsize>
+            <weight>50</weight>
+            <italic>true</italic>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 115, 0);</string>
+          </property>
+          <property name="text">
+           <string>TraitementdeProduit</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pdf_2">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>620</y>
+            <width>81</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>PDF</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../bannourqt/chaima08/chaimaf/crud yassine/Atelier_Connexion/im/picture_as_pdf_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>../bannourqt/chaima08/chaimaf/crud yassine/Atelier_Connexion/im/picture_as_pdf_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>330</y>
+            <width>121</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>AJOUTER</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="modifier_2">
+          <property name="geometry">
+           <rect>
+            <x>570</x>
+            <y>330</y>
+            <width>131</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>MODIFIER</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="trier">
+          <property name="geometry">
+           <rect>
+            <x>930</x>
+            <y>670</y>
+            <width>131</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>TRI</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="suprimer">
+          <property name="geometry">
+           <rect>
+            <x>790</x>
+            <y>330</y>
+            <width>131</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>SUPPRIMER</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="type">
+          <property name="geometry">
+           <rect>
+            <x>520</x>
+            <y>120</y>
+            <width>141</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <item>
+           <property name="text">
+            <string>refrigeration</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>congelation</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>stockage sous vide</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLineEdit" name="id_supp">
+          <property name="geometry">
+           <rect>
+            <x>940</x>
+            <y>340</y>
+            <width>113</width>
+            <height>25</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_16">
+          <property name="geometry">
+           <rect>
+            <x>740</x>
+            <y>680</y>
+            <width>121</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string> trier selon la duree:</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="tri_duree">
+          <property name="geometry">
+           <rect>
+            <x>880</x>
+            <y>680</y>
+            <width>41</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label">
+          <property name="geometry">
+           <rect>
+            <x>390</x>
+            <y>130</y>
+            <width>121</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Type de traitement:</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="gostat_2">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>330</y>
+            <width>151</width>
+            <height>54</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>STATISTIQUES</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="afficher">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>670</y>
+            <width>121</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>AFFICHER</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="rech_id">
+          <property name="geometry">
+           <rect>
+            <x>470</x>
+            <y>670</y>
+            <width>131</width>
+            <height>41</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_29">
+          <property name="geometry">
+           <rect>
+            <x>330</x>
+            <y>670</y>
+            <width>131</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Lucida Bright</family>
+            <pointsize>-1</pointsize>
+            <weight>87</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+padding: 16px 500px;
+
+
+
+height: 24px;
+
+background: #72C14E;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+
+
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+
+
+
+QPushButton:hover{
+padding: 16px 500px;
+
+
+
+
+background: #80DB56;
+border-radius: 4px;
+
+
+
+
+/* Se Connecter */
+
+height: 24px;
+
+
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+}
+QPushButton:pressed{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #CDFFB6;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}
+QPushButton:disabled{/* Property 1=Variant3 */
+
+
+padding: 16px 24px;
+
+position: absolute;
+
+left: 20px;
+top: 172px;
+
+background: #A9A9A9	;
+
+border-radius: 4px;
+
+
+/* Se Connecter */
+
+
+height: 24px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+
+color: #72C04E;
+
+}</string>
+          </property>
+          <property name="text">
+           <string>RECHERCHE</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pdf_3">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>560</y>
+            <width>81</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>QrCode</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../bannourqt/chaima08/chaimaf/crud yassine/Atelier_Connexion/im/picture_as_pdf_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>../bannourqt/chaima08/chaimaf/crud yassine/Atelier_Connexion/im/picture_as_pdf_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pdf_4">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>500</y>
+            <width>81</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>arduino</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../bannourqt/chaima08/chaimaf/crud yassine/Atelier_Connexion/im/picture_as_pdf_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>../bannourqt/chaima08/chaimaf/crud yassine/Atelier_Connexion/im/picture_as_pdf_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
+          </property>
+         </widget>
+         <zorder>id_2</zorder>
+         <zorder>label_7</zorder>
+         <zorder>pushButton_2</zorder>
+         <zorder>modifier_2</zorder>
+         <zorder>label_16</zorder>
+         <zorder>pdf_4</zorder>
+         <zorder>idCl</zorder>
+         <zorder>tmpMax</zorder>
+         <zorder>duree</zorder>
+         <zorder>tmpMin</zorder>
+         <zorder>tab_5</zorder>
+         <zorder>prix</zorder>
+         <zorder>trier</zorder>
+         <zorder>suprimer</zorder>
+         <zorder>type</zorder>
+         <zorder>id_supp</zorder>
+         <zorder>tri_duree</zorder>
+         <zorder>label</zorder>
+         <zorder>gostat_2</zorder>
+         <zorder>afficher</zorder>
+         <zorder>rech_id</zorder>
+         <zorder>pushButton_29</zorder>
+         <zorder>pdf_2</zorder>
+         <zorder>pdf_3</zorder>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="page_8">
+        <widget class="QWidget" name="verticalLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>110</y>
+           <width>991</width>
+           <height>381</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="stats_3"/>
+        </widget>
+        <widget class="QPushButton" name="back_fromcalendr_2">
+         <property name="geometry">
+          <rect>
+           <x>630</x>
+           <y>560</y>
+           <width>141</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #6200ea;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+QPushButton:hover {
+    background-color: #3700b3;
+}
+QPushButton:pressed {
+    background-color: #30009c;
+}</string>
+         </property>
+         <property name="text">
+          <string>Go Back</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="page_11">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="geometry">
+          <rect>
+           <x>420</x>
+           <y>60</y>
+           <width>571</width>
+           <height>511</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>smart</string>
+         </property>
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>70</y>
+            <width>251</width>
+            <height>61</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_2">
+          <property name="geometry">
+           <rect>
+            <x>80</x>
+            <y>80</y>
+            <width>91</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>ID : </string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_5">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>160</y>
+            <width>281</width>
+            <height>191</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>test</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="test">
+          <property name="geometry">
+           <rect>
+            <x>440</x>
+            <y>70</y>
+            <width>101</width>
+            <height>61</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>test</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QPushButton" name="back_fromcalendr">
+         <property name="geometry">
+          <rect>
+           <x>690</x>
+           <y>630</y>
+           <width>141</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #6200ea;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+QPushButton:hover {
+    background-color: #3700b3;
+}
+QPushButton:pressed {
+    background-color: #30009c;
+}</string>
+         </property>
+         <property name="text">
+          <string>Go Back</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="page_12">
+        <widget class="QLabel" name="qrcodecommande_2">
+         <property name="geometry">
+          <rect>
+           <x>500</x>
+           <y>80</y>
+           <width>461</width>
+           <height>321</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="qrCode">
+         <property name="geometry">
+          <rect>
+           <x>520</x>
+           <y>470</y>
+           <width>161</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>QrCode</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="qr_code_bar">
+         <property name="geometry">
+          <rect>
+           <x>700</x>
+           <y>470</y>
+           <width>131</width>
+           <height>41</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="back_fromcalendr_3">
+         <property name="geometry">
+          <rect>
+           <x>650</x>
+           <y>630</y>
+           <width>141</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #6200ea;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+QPushButton:hover {
+    background-color: #3700b3;
+}
+QPushButton:pressed {
+    background-color: #30009c;
+}</string>
+         </property>
+         <property name="text">
+          <string>Go Back</string>
+         </property>
+        </widget>
+       </widget>
       </widget>
      </item>
     </layout>
@@ -5422,7 +6900,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1617</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
